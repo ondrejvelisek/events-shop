@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>events-shop</artifactId>
+		<groupId>cz.muni.fi</groupId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>events-shop-service</artifactId>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>cz.muni.fi</groupId>
+			<artifactId>events-shop-common</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>cz.muni.fi</groupId>
+			<artifactId>events-shop-repository</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
+		</dependency>
+
+	</dependencies>
+
+
+</project>
