@@ -21,7 +21,7 @@ mvn wildfly:run
 
 ### Test in your browser:
 ```
-http://localhost:8080/events-shop-rest/api/v0.1/events
+http://localhost:8080/events-shop-rest/api/v0.1/categories
 ```
 Should return JSON Array with three sample objects
 

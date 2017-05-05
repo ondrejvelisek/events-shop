@@ -5,20 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Bean representing shopping cart of a customer.
  */
-public class ShoppingCart implements HasId {
+public class ShoppingCart extends Bean {
 
-	private long id;
 	private List<Event> events;
 
-	public ShoppingCart(long id) {
-		this.id = id;
+	public ShoppingCart() {
 		this.events = new ArrayList<>();
-	}
-
-	public long getId() {
-		return id;
 	}
 
 	public List<Event> getEvents() {
@@ -28,4 +22,5 @@ public class ShoppingCart implements HasId {
 	public BigDecimal getPrice() {
 		return events.stream().map(Event::getPrice).reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
 	}
+
 }

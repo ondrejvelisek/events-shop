@@ -3,22 +3,19 @@ package cz.muni.fi.eventsshop.model;
 import java.math.BigDecimal;
 
 /**
- *
+ * Bean representing relation between Service and Event.
  */
-public class ServiceOrder implements HasId {
+public class ServiceOrder extends Bean {
 
-	private long id;
 	private Service service;
 	private int persons;
 
-	public ServiceOrder(long id, Service service, int persons) {
-		this.id = id;
-		this.service = service;
-		this.persons = persons;
+	public ServiceOrder() {
 	}
 
-	public long getId() {
-		return id;
+	public ServiceOrder(Service service, int persons) {
+		this.service = service;
+		this.persons = persons;
 	}
 
 	public Service getService() {
@@ -32,4 +29,5 @@ public class ServiceOrder implements HasId {
 	public BigDecimal getPrice() {
 		return service.getPricePerPerson().multiply(BigDecimal.valueOf(persons));
 	}
+
 }

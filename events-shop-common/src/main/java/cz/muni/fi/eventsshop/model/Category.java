@@ -1,22 +1,20 @@
 package cz.muni.fi.eventsshop.model;
 
 /**
- *
+ * Bean representing category of a service.
  */
-public class Category implements HasId {
+public class Category extends Bean implements Adjustable<Category> {
 
-	private long id;
 	private String name;
 	private String description;
 
-	public Category(long id, String name, String description) {
-		this.id = id;
-		this.name = name;
-		this.description = description;
+	public Category() {
+		// JavaEE JSON parser needs default constructor
 	}
 
-	public long getId() {
-		return id;
+	public Category(String name, String description) {
+		this.name = name;
+		this.description = description;
 	}
 
 	public String getName() {
@@ -26,4 +24,10 @@ public class Category implements HasId {
 	public String getDescription() {
 		return description;
 	}
+
+	public void adjust(Category model) {
+		this.name = model.getName();
+		this.description = model.getDescription();
+	}
+
 }

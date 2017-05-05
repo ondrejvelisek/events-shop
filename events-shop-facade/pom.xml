@@ -9,7 +9,7 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>events-shop-service</artifactId>
+	<artifactId>events-shop-facade</artifactId>
 
 	<dependencies>
 
@@ -20,7 +20,7 @@
 
 		<dependency>
 			<groupId>cz.muni.fi</groupId>
-			<artifactId>events-shop-repository</artifactId>
+			<artifactId>events-shop-service</artifactId>
 		</dependency>
 
 		<dependency>
@@ -28,7 +28,11 @@
 			<artifactId>cdi-api</artifactId>
 		</dependency>
 
-	</dependencies>
+		<dependency>
+			<groupId>javax.transaction</groupId>
+			<artifactId>javax.transaction-api</artifactId>
+		</dependency>
 
+	</dependencies>
 
 </project>

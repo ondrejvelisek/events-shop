@@ -4,26 +4,24 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- *
+ * Bean representing type of service. It is base unit which customer can order.
  */
-public class Service implements HasId {
+public class Service extends Bean implements Adjustable<Service> {
 
-	private long id;
 	private String name;
 	private String description;
 	private BigDecimal pricePerPerson;
 	private List<Category> categories;
 
-	public Service(long id, String name, String description, BigDecimal pricePerPerson, List<Category> categories) {
-		this.id = id;
+	public Service() {
+		// JavaEE JSON parser needs default constructor
+	}
+
+	public Service(String name, String description, BigDecimal pricePerPerson, List<Category> categories) {
 		this.name = name;
 		this.description = description;
 		this.pricePerPerson = pricePerPerson;
 		this.categories = categories;
-	}
-
-	public long getId() {
-		return id;
 	}
 
 	public String getName() {
@@ -41,4 +39,13 @@ public class Service implements HasId {
 	public List<Category> getCategories() {
 		return categories;
 	}
+
+	@Override
+	public void adjust(Service bean) {
+		this.name = bean.getName();
+		this.description = bean.getDescription();
+		this.pricePerPerson = bean.getPricePerPerson();
+		this.categories = bean.getCategories();
+	}
+
 }

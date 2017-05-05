@@ -7,22 +7,19 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
- *
+ * Bean representing event which customer is ordering
  */
-public class Event implements HasId {
+public class Event extends Bean {
 
-	private long id;
 	private String name;
 	private List<ServiceOrder> serviceOrders;
 
-	public Event(long id, String name) {
-		this.id = id;
-		this.name = name;
-		this.serviceOrders = new ArrayList<>();
+	public Event() {
 	}
 
-	public long getId() {
-		return id;
+	public Event(String name) {
+		this.name = name;
+		this.serviceOrders = new ArrayList<>();
 	}
 
 	public String getName() {
@@ -36,4 +33,5 @@ public class Event implements HasId {
 	public BigDecimal getPrice() {
 		return serviceOrders.stream().map(ServiceOrder::getPrice).reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
 	}
+
 }
