@@ -24,14 +24,17 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 	private Map<Long, Category> categories;
 
 	@PostConstruct
-	private void init() {
+	private void init() throws InternalException {
 		categories = new HashMap<>();
 		createCategory(new Category("Prostory", "Kde Vaše událost bude probíhat?"));
 		createCategory(new Category("Jidlo a pití", "Ke každé společenské události patří něco dobrého k snědku."));
 		createCategory(new Category("Zábava", "Čím hosty pobavíme? Hudba, sport, kulturní show, ..."));
 	}
 
-	public void createCategory(Category category) {
+	public void createCategory(Category category) throws InternalException {
+
+		artificalDelay();
+
 		if (categories.containsKey(category.getId())) {
 			throw new BeanAlreadyExistsException("Category with id "+category.getId()+" already exists.");
 		}
@@ -46,28 +49,48 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 		category.setId(lastId + 1);
 	}
 
-	public List<Category> getAllCategories() {
+	public List<Category> getAllCategories() throws InternalException {
+
+		artificalDelay();
+
 		return new ArrayList<>(categories.values());
 	}
 
-	public Category getCategoryById(long id) {
+	public Category getCategoryById(long id) throws InternalException {
+
+		artificalDelay();
+
 		if (!categories.containsKey(id)) {
 			throw new BeanNotExistsException("Category with id "+id+" was not found.");
 		}
 		return categories.get(id);
 	}
 
-	public void updateCategory(Category category) {
+	public void updateCategory(Category category) throws InternalException {
+
+		artificalDelay();
+
 		if (!categories.containsKey(category.getId())) {
 			throw new BeanNotExistsException("Updating category "+category+" was not found.");
 		}
 		categories.put(category.getId(), category);
 	}
 
-	public void deleteCategory(Category category) {
+	public void deleteCategory(Category category) throws InternalException {
+
+		artificalDelay();
+
 		if (!categories.containsKey(category.getId())) {
 			throw new BeanNotExistsException("Deleting category "+category+" was not found.");
 		}
 		categories.remove(category.getId());
+	}
+
+	private void artificalDelay() throws InternalException {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			throw new InternalException(e);
+		}
 	}
 }
