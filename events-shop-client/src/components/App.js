@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router'
 import { initApp } from "../actions/categories";
 import { connect } from 'react-redux';
-
+import { userManager } from '../userManager';
 
 class App extends Component {
 
@@ -12,7 +12,23 @@ class App extends Component {
 		);
 	}
 
+	signin() {
+		userManager.signinRedirect({ data: { redirectUrl: window.location.pathname }});
+	}
+
 	render() {
+
+		let login;
+		if (this.props.user) {
+			login = (<p className="navbar-text navbar-right">{this.props.user.profile.name}</p>);
+		} else {
+			login = (
+				<button className="btn btn-default navbar-btn navbar-right" onClick={this.signin.bind(this)}>
+					Sign in
+				</button>
+			);
+		}
+
 		return (
 			<div className="App">
 
@@ -28,8 +44,9 @@ class App extends Component {
 								<li><Link to="/categories">Categories</Link></li>
 							</ul>
 							<p className="navbar-text navbar-right">
-								<span className="glyphicon glyphicon-shopping-cart"/> cart
+								<i className="glyphicon glyphicon-shopping-cart"/> cart
 							</p>
+							{login}
 						</div>
 					</div>
 
@@ -53,5 +70,10 @@ class App extends Component {
 	}
 }
 
+const mapStateToProps = ({auth}) => {
+	return {
+		user: auth.user
+	}
+};
 
-export default connect()(App)
+export default connect(mapStateToProps)(App)

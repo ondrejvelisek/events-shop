@@ -10,11 +10,6 @@ import java.util.List;
  */
 public interface CategoryFacade {
 
-	/**
-	 *
-	 * @param data
-	 * @return
-	 */
 	Category createCategory(Category data) throws InternalException;
 
 	List<Category> getAllCategories() throws InternalException;

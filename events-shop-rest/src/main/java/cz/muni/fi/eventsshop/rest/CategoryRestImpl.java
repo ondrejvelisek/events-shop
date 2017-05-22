@@ -4,6 +4,7 @@ import cz.muni.fi.eventsshop.exceptions.InternalException;
 import cz.muni.fi.eventsshop.model.Category;
 import cz.muni.fi.eventsshop.facade.CategoryFacade;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Path;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 /**
  *
  */
+@ApplicationScoped
 @Path("/categories")
 public class CategoryRestImpl implements CategoryRest {
 

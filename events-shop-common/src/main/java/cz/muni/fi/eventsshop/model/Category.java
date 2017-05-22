@@ -30,4 +30,12 @@ public class Category extends Bean implements Adjustable<Category> {
 		this.description = model.getDescription();
 	}
 
+	@Override
+	public String toString() {
+		return "Category{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", description='" + description + '\'' +
+				'}';
+	}
 }
