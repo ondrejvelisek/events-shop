@@ -1,4 +1,3 @@
-import 'whatwg-fetch'
 
 export const FETCH_CATEGORIES_START = "FETCH_CATEGORIES_START";
 export const FETCH_CATEGORIES_SUCCESS = "FETCH_CATEGORIES_SUCCESS";
@@ -25,13 +24,11 @@ function fetchCategoriesError(error) {
 }
 
 export function fetchCategories() {
-	return (dispatch) => {
+	return (dispatch, getState, { api }) => {
 		dispatch(fetchCategoriesStart());
-		fetch("http://localhost:8080/events-shop-rest/api/v0.1/categories")
-			.then(checkError)
-			.then(response => response.json())
-			.then(json => dispatch(fetchCategoriesSuccess(json)))
-			.catch(e => dispatch(fetchCategoriesError(e)))
+		api.categoriesApi.getAllCategories()
+			.then(categories => dispatch(fetchCategoriesSuccess(categories)))
+			.catch(e => dispatch(fetchCategoriesError(e)));
 	};
 }
 
@@ -40,18 +37,4 @@ export function initApp() {
 	return (dispatch) => {
 		dispatch(fetchCategories());
 	};
-}
-
-function checkError(response) {
-	if (response.ok) {
-		return response;
-	} else {
-		if (response.headers.get('Content-Type') === 'application/json') {
-			return response.json().then(json => {
-				throw new Error(json.message);
-			});
-		} else {
-			throw new Error(response.statusText);
-		}
-	}
 }

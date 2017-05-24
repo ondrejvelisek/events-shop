@@ -3,6 +3,7 @@ package cz.muni.fi.eventsshop.rest;
 import cz.muni.fi.eventsshop.exceptions.InternalException;
 import cz.muni.fi.eventsshop.model.Category;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -23,6 +24,7 @@ public interface CategoryRest {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
+	@RolesAllowed({"ADMIN"})
 	Category createCategory(Category category) throws InternalException;
 
 	@GET
@@ -37,10 +39,12 @@ public interface CategoryRest {
 	@PUT
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
+	@RolesAllowed({"ADMIN"})
 	void updateCategory(@PathParam("id") long id, Category category) throws InternalException;
 
 	@DELETE
 	@Path("/{id}")
+	@RolesAllowed({"ADMIN"})
 	void deleteCategory(@PathParam("id") long id) throws InternalException;
 
 }

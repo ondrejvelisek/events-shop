@@ -1,4 +1,4 @@
-package cz.muni.fi.eventsshop.rest;
+package cz.muni.fi.eventsshop.security;
 
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerResponseContext;

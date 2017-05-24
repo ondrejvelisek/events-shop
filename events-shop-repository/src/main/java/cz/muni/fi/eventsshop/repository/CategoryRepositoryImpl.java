@@ -88,7 +88,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 
 	private void artificalDelay() throws InternalException {
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(500);
 		} catch (InterruptedException e) {
 			throw new InternalException(e);
 		}
