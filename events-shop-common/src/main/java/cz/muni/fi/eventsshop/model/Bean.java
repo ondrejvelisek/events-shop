@@ -2,16 +2,14 @@ package cz.muni.fi.eventsshop.model;
 
 import java.util.Objects;
 
-public abstract class Bean implements HasId {
+public abstract class Bean {
 
 	protected long id;
 
-	@Override
 	public long getId() {
 		return id;
 	}
 
-	@Override
 	public void setId(long id) {
 		this.id = id;
 	}

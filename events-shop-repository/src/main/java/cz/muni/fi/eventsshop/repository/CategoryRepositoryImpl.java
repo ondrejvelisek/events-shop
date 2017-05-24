@@ -48,7 +48,13 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 		categories.put(lastId + 1, category);
 		category.setId(lastId + 1);
 	}
-
+        
+        public void adjust(Category model) {
+		this.name = model.getName();
+		this.description = model.getDescription();
+	}
+        
+        //nema tu byt override?
 	public List<Category> getAllCategories() throws InternalException {
 
 		artificalDelay();

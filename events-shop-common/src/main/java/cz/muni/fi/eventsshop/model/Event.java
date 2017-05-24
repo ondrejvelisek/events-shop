@@ -30,8 +30,10 @@ public class Event extends Bean {
 		return serviceOrders;
 	}
 
-	public BigDecimal getPrice() {
-		return serviceOrders.stream().map(ServiceOrder::getPrice).reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
-	}
+        
+        //TODO do eventsrepository
+//	public BigDecimal getPrice() {
+//		return serviceOrders.stream().map(ServiceOrder::getPrice).reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
+//	}
 
 }
