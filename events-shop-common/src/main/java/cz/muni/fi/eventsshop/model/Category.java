@@ -3,7 +3,7 @@ package cz.muni.fi.eventsshop.model;
 /**
  * Bean representing category of a service.
  */
-public class Category extends Bean implements Adjustable<Category> {
+public class Category extends Bean {
 
 	private String name;
 	private String description;
@@ -11,7 +11,8 @@ public class Category extends Bean implements Adjustable<Category> {
 	public Category() {
 		// JavaEE JSON parser needs default constructor
 	}
-
+        
+        // NEVIM ZDA TOTO TU MA BYT?
 	public Category(String name, String description) {
 		this.name = name;
 		this.description = description;
@@ -25,9 +26,5 @@ public class Category extends Bean implements Adjustable<Category> {
 		return description;
 	}
 
-	public void adjust(Category model) {
-		this.name = model.getName();
-		this.description = model.getDescription();
-	}
 
 }

@@ -25,9 +25,11 @@ public class ServiceOrder extends Bean {
 	public int getPersons() {
 		return persons;
 	}
+        
+        //TODO do repository
 
-	public BigDecimal getPrice() {
-		return service.getPricePerPerson().multiply(BigDecimal.valueOf(persons));
-	}
+//	public BigDecimal getPrice() {
+//		return service.getPricePerPerson().multiply(BigDecimal.valueOf(persons));
+//	}
 
 }

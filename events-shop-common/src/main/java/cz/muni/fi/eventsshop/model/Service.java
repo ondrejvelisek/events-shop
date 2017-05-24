@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Bean representing type of service. It is base unit which customer can order.
  */
-public class Service extends Bean implements Adjustable<Service> {
+public class Service extends Bean {
 
 	private String name;
 	private String description;
@@ -40,12 +40,13 @@ public class Service extends Bean implements Adjustable<Service> {
 		return categories;
 	}
 
-	@Override
-	public void adjust(Service bean) {
-		this.name = bean.getName();
-		this.description = bean.getDescription();
-		this.pricePerPerson = bean.getPricePerPerson();
-		this.categories = bean.getCategories();
-	}
+        //TODO s timto do nake service repository
+//	@Override
+//	public void adjust(Service bean) {
+//		this.name = bean.getName();
+//		this.description = bean.getDescription();
+//		this.pricePerPerson = bean.getPricePerPerson();
+//		this.categories = bean.getCategories();
+//	}
 
 }

@@ -18,9 +18,11 @@ public class ShoppingCart extends Bean {
 	public List<Event> getEvents() {
 		return events;
 	}
-
-	public BigDecimal getPrice() {
-		return events.stream().map(Event::getPrice).reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
-	}
+        //do nake repository pripadne CELY TEN CART SMAZAT
+        
+//
+//	public BigDecimal getPrice() {
+//		return events.stream().map(Event::getPrice).reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
+//	}
 
 }
