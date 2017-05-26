@@ -38,7 +38,7 @@ public class ServiceFacadeImpl implements ServiceFacade {
     @Override
     public void updateService(long id, Service data) throws InternalException {
         Service serv = getServiceById(id);
-        serv.adjust(data);
+//        serv.adjust(data);
         service.updateService(serv);
 
     }

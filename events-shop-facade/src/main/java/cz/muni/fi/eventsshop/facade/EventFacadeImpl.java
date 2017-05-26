@@ -38,7 +38,7 @@ public class EventFacadeImpl implements EventFacade {
     @Override
     public void updateEvent(long id, Event data) throws InternalException {
         Event event = service.getEventById(id);
-        event.adjust(data);
+//        event.adjust(data);
         service.updateEvent(event);
     }
 

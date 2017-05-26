@@ -4,6 +4,7 @@ import cz.muni.fi.eventsshop.exceptions.InternalException;
 import cz.muni.fi.eventsshop.facade.ServiceFacade;
 import cz.muni.fi.eventsshop.model.Service;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Path;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 /**
  * Created by patrik.cyprian on 14.5.2017.
  */
+@ApplicationScoped
 @Path("/services")
 public class ServiceRestImpl implements ServiceRest {
 
