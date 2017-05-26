@@ -111,22 +111,22 @@ public class JwtAuthenticationFilter implements ContainerRequestFilter {
 			if (user == null) {
 				log.trace("User for principal "+principal+" has not been found. " +
 						"Creating new one.");
-				user = userFacade.createUser(new User(
-						principal.getName(),
-						new HashSet<>(Arrays.asList("USER")),
-						principal.getJwt().getClaim("name").asString(),
-						principal.getJwt().getClaim("email").asString()
-				));
+//				user = userFacade.createUser(new User(
+//						principal.getName(),
+//						new HashSet<>(Arrays.asList("USER")),
+//						principal.getJwt().getClaim("name").asString(),
+//						principal.getJwt().getClaim("email").asString()
+//				));
 				log.trace("User has been created " + user);
 			} else {
 				log.trace("User for principal "+principal+" has been found "+user);
 				log.trace("Going to update info of user "+user+" based on principal "+principal);
-				user.adjust(new User(
-						user.getExternalId(),
-						user.getRoles(),
-						principal.getJwt().getClaim("name").asString(),
-						principal.getJwt().getClaim("email").asString()
-				));
+//				user.adjust(new User(
+//						user.getExternalId(),
+//						user.getRoles(),
+//						principal.getJwt().getClaim("name").asString(),
+//						principal.getJwt().getClaim("email").asString()
+//				));
 				userFacade.updateUser(user.getId(), user);
 				log.trace("Info of user "+user+" has been updated.");
 			}

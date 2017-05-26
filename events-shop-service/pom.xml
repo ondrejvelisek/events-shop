@@ -20,7 +20,8 @@
 
 		<dependency>
 			<groupId>cz.muni.fi</groupId>
-			<artifactId>events-shop-repository</artifactId>
+			<artifactId>events-shop-persistence</artifactId>
+			<version>0.1</version>
 		</dependency>
 
 		<dependency>
