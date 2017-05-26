@@ -11,5 +11,5 @@ public interface WeatherRest {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    String getWheatherForecast(String cityName) throws Exception;
+    String getWeatherForecast(String cityName) throws Exception;
 }

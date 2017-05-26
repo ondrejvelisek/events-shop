@@ -20,7 +20,7 @@ public class WeatherServiceImpl implements WeatherService {
 
 
     @Override
-    public String getWheatherForecast(String cityName) throws Exception {
+    public String getWeatherForecast(String cityName) throws Exception {
         String url = "http://api.openweathermap.org/data/2.5/forecast?q=" + cityName +"," +  CZ_CODE + "&APPID=" + API_KEY;
 
         URL obj = new URL(url);

@@ -17,7 +17,7 @@ public class WeatherRestImpl implements WeatherRest {
     private WeatherFacade weatherFacade;
 
     @Override
-    public String getWheatherForecast(String cityName) throws Exception {
-        return weatherFacade.getWheatherForecast(cityName);
+    public String getWeatherForecast(String cityName) throws Exception {
+        return weatherFacade.getWeatherForecast(cityName);
     }
 }

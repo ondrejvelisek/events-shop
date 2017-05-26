@@ -5,5 +5,5 @@ package cz.muni.fi.eventsshop.facade;
  */
 public interface WeatherFacade {
 
-    String getWheatherForecast(String cityName) throws Exception;
+    String getWeatherForecast(String cityName) throws Exception;
 }

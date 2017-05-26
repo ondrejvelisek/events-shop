@@ -6,5 +6,5 @@ package cz.muni.fi.eventsshop.service;
  */
 public interface WeatherService {
 
-    String getWheatherForecast(String cityName) throws Exception;
+    String getWeatherForecast(String cityName) throws Exception;
 }

@@ -17,7 +17,7 @@ public class WeatherFacadeImpl implements WeatherFacade {
     private WeatherService weatherService;
 
     @Override
-    public String getWheatherForecast(String cityName) throws Exception {
-        return weatherService.getWheatherForecast(cityName);
+    public String getWeatherForecast(String cityName) throws Exception {
+        return weatherService.getWeatherForecast(cityName);
     }
 }
