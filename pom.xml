@@ -11,12 +11,11 @@
 
 	<modules>
 		<module>events-shop-common</module>
-		<module>events-shop-repository</module>
 		<module>events-shop-service</module>
 		<module>events-shop-facade</module>
 		<module>events-shop-rest</module>
-        <module>events-shop-persistence</module>
-    </modules>
+		<module>events-shop-persistence</module>
+	</modules>
 
 	<dependencyManagement>
 		<dependencies>
