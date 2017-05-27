@@ -15,7 +15,8 @@
 		<module>events-shop-service</module>
 		<module>events-shop-facade</module>
 		<module>events-shop-rest</module>
-	</modules>
+        <module>events-shop-persistence</module>
+    </modules>
 
 	<dependencyManagement>
 		<dependencies>

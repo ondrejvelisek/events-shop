@@ -40,7 +40,7 @@ public class UserFacadeImpl implements UserFacade {
 	@Override
 	public void updateUser(long id, User data) throws InternalException {
 		User user = service.getUserById(id);
-		user.adjust(data);
+//		user.adjust(data);
 		service.updateUser(user);
 	}
 

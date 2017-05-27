@@ -1,7 +1,7 @@
 package cz.muni.fi.eventsshop.service;
 
-import cz.muni.fi.eventsshop.exceptions.InternalException;
 import cz.muni.fi.eventsshop.model.User;
+import cz.muni.fi.eventsshop.exceptions.InternalException;
 
 import java.util.List;
 

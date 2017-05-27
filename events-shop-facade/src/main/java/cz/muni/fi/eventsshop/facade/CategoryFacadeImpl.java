@@ -31,7 +31,6 @@ public class CategoryFacadeImpl implements CategoryFacade {
 
 	public void updateCategory(long id, Category data) throws InternalException {
 		Category category = service.getCategoryById(id);
-		category.adjust(data);
 		service.updateCategory(category);
 	}
 

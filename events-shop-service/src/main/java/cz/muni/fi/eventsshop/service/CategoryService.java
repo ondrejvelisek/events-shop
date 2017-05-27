@@ -2,8 +2,8 @@ package cz.muni.fi.eventsshop.service;
 
 import java.util.List;
 
-import cz.muni.fi.eventsshop.exceptions.InternalException;
 import cz.muni.fi.eventsshop.model.Category;
+import cz.muni.fi.eventsshop.exceptions.InternalException;
 
 /**
  * Service is responsible for bussiness logic
