@@ -31,6 +31,12 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public User findByOAuthId(String id) {
+        return manager.createQuery("select u from " + User.class.getName() + " u where u.id = " + id,
+                User.class).getSingleResult();
+    }
+
+    @Override
     public User find(Long userId) {
         return manager.find(User.class, userId);
     }
