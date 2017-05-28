@@ -29,18 +29,20 @@ var state = {
 				name: 'Coffee and tea',
 				description: 'Coffee break including coffee, tea, water and cookies',
 				price: 22,
-				categoryId: 2,
-				viewing: 2		// number of clients viewing this service
+				categoryId: 2
 			},
 			{
 				id: 6,
 				name: 'Laser game',
 				description: 'Ideal way how to develope healthy relationships in your team',
 				price: 180,
-				categoryId: 3,
-				viewing: 4		// number of clients viewing this service
+				categoryId: 3
 			}
 		],
+		viewing: {
+			5: 2,		// number of clients viewing service with id 5
+			6: 4		// number of clients viewing service with id 6
+		},
 		updating: false,
 	},
 	events_state: {
