@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router'
 import { initApp } from "../actions/categories";
 import { connect } from 'react-redux';
-import { userManager } from '../userManager';
+import { userManager } from '../utils/userManager';
 
 class App extends Component {
 
