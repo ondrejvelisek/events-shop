@@ -1,23 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {fetchCategories} from "../actions/categories";
 import NavItem from "./NavItem";
 
 class Categories extends Component {
 
-	componentWillMount() {
-		this.refresh();
-	}
-
-	refresh = () => {
-		this.props.dispatch(
-			fetchCategories()
-		);
-	};
-
 	render() {
 
-		let { categories, updating } = this.props.categoriesState;
+		let { categories } = this.props.categories_state;
 
 		return (
             <div className="Categories">
@@ -28,9 +17,6 @@ class Categories extends Component {
 
 							<li className="text-muted">
 								Categories
-								<button onClick={this.refresh} className="btn-link">
-									<i className="glyphicon glyphicon-refresh" style={updating ? {animation: 'spin 2s infinite linear'} : {}}/>
-								</button>
 							</li>
 
 							<div className="nav-divider"/>
@@ -54,9 +40,9 @@ class Categories extends Component {
 	}
 }
 
-const mapStateToProps = ({categoriesState}) => {
+const mapStateToProps = ({categories_state}) => {
 	return {
-		categoriesState
+		categories_state
 	}
 };
 

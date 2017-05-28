@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router'
-import { initApp } from "../actions/categories";
+import { initApp } from "../actions";
 import { connect } from 'react-redux';
 import { userManager } from '../utils/userManager';
 
@@ -70,9 +70,9 @@ class App extends Component {
 	}
 }
 
-const mapStateToProps = ({auth}) => {
+const mapStateToProps = ({auth_state}) => {
 	return {
-		user: auth.user
+		user: auth_state.user
 	}
 };
 
