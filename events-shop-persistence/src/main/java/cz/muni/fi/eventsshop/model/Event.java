@@ -39,6 +39,30 @@ public class Event extends AbstractEntity {
     @Enumerated
 	private EventState state = EventState.NEW;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Event event = (Event) o;
+
+        if (!getName().equals(event.getName())) return false;
+        if (!getPrice().equals(event.getPrice())) return false;
+        if (!getDateStart().equals(event.getDateStart())) return false;
+        if (!getDateEnd().equals(event.getDateEnd())) return false;
+        return getState() == event.getState();
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getName().hashCode();
+        result = 31 * result + getPrice().hashCode();
+        result = 31 * result + getDateStart().hashCode();
+        result = 31 * result + getDateEnd().hashCode();
+        result = 31 * result + getState().hashCode();
+        return result;
+    }
+
     public String getName() {
         return name;
     }
