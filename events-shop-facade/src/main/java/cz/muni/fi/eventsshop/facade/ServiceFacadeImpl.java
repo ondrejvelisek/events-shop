@@ -1,5 +1,6 @@
 package cz.muni.fi.eventsshop.facade;
 
+import cz.muni.fi.eventsshop.exceptions.BeanNotExistsException;
 import cz.muni.fi.eventsshop.exceptions.InternalException;
 import cz.muni.fi.eventsshop.model.Service;
 import cz.muni.fi.eventsshop.service.ServiceService;
@@ -37,9 +38,10 @@ public class ServiceFacadeImpl implements ServiceFacade {
 
     @Override
     public void updateService(long id, Service data) throws InternalException {
-        Service serv = getServiceById(id);
-//        serv.adjust(data);
-        service.updateService(serv);
+        if (service.getServiceById(id) == null){
+            throw new BeanNotExistsException("Service with id "+ id + " does not exist.");
+        }
+        service.updateService(data);
 
     }
 

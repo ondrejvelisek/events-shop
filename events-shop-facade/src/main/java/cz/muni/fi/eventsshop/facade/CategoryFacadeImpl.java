@@ -1,5 +1,6 @@
 package cz.muni.fi.eventsshop.facade;
 
+import cz.muni.fi.eventsshop.exceptions.BeanNotExistsException;
 import cz.muni.fi.eventsshop.exceptions.InternalException;
 import cz.muni.fi.eventsshop.model.Category;
 import cz.muni.fi.eventsshop.service.CategoryService;
@@ -30,8 +31,10 @@ public class CategoryFacadeImpl implements CategoryFacade {
 	}
 
 	public void updateCategory(long id, Category data) throws InternalException {
-		Category category = service.getCategoryById(id);
-		service.updateCategory(category);
+		if (service.getCategoryById(id) == null){
+			throw new BeanNotExistsException("Category with id "+ id + " does not exist.");
+		}
+		service.updateCategory(data);
 	}
 
 	public void deleteCategory(long id) throws InternalException {

@@ -1,5 +1,6 @@
 package cz.muni.fi.eventsshop.facade;
 
+import cz.muni.fi.eventsshop.exceptions.BeanNotExistsException;
 import cz.muni.fi.eventsshop.exceptions.InternalException;
 import cz.muni.fi.eventsshop.model.EventService;
 import cz.muni.fi.eventsshop.service.EventServiceService;
@@ -37,7 +38,9 @@ public class EventServiceFacadeImpl implements EventServiceFacade {
 
     @Override
     public void updateEventService(long id, EventService data) throws InternalException {
-        //TODO : check other facade implementations of update method
+        if (eventServiceService.getEventServiceById(id) == null){
+            throw new BeanNotExistsException("EventService with id "+ id + " does not exist.");
+        }
         eventServiceService.updateEventService(data);
     }
 
