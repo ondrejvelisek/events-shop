@@ -9,11 +9,11 @@ public class Category extends AbstractEntity {
 
     @NotNull
     @Column(nullable = false)
-	private String name;
+    private String name;
 
     @NotNull
     @Column(nullable = false)
-	private String description;
+    private String description;
 
     public String getName() {
         return name;

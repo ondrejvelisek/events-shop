@@ -12,32 +12,32 @@ public class Event extends AbstractEntity {
 
     @NotNull
     @Column(nullable = false)
-	private String name;
+    private String name;
 
     @ManyToMany
-	private List<EventService> eventServices;
+    private List<EventService> eventServices;
 
-	@DecimalMin("0.00")
+    @DecimalMin("0.00")
     @Column(nullable = false)
-	private BigDecimal price = BigDecimal.ZERO;
+    private BigDecimal price = BigDecimal.ZERO;
 
-	@NotNull
+    @NotNull
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
-	private Date dateStart;
+    private Date dateStart;
 
-	@NotNull
+    @NotNull
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
-	private Date dateEnd;
+    private Date dateEnd;
 
-	@NotNull
+    @NotNull
     @ManyToOne(optional = false)
-	private User client;
+    private User client;
 
-	@NotNull
+    @NotNull
     @Enumerated
-	private EventState state = EventState.NEW;
+    private EventState state = EventState.NEW;
 
     public String getName() {
         return name;
@@ -96,7 +96,7 @@ public class Event extends AbstractEntity {
     }
 
     public enum EventState {
-	    NEW,
+        NEW,
         APPROVED,
         PAID,
         FINISHED,

@@ -9,24 +9,24 @@ import java.util.List;
 @Entity
 public class User extends AbstractEntity {
 
-	@NotNull
+    @NotNull
     @Column(nullable = false)
-	private String name;
+    private String name;
 
-	@Column(nullable = false)
-	private String password;
+    @Column(nullable = false)
+    private String password;
 
     @NotNull
     @Email
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Enumerated(value= EnumType.STRING)
+    @Enumerated(value = EnumType.STRING)
     @ElementCollection(fetch = FetchType.EAGER, targetClass = Role.class)
     private List<Role> roles;
 
-	public enum Role {
-	    ADMIN,
+    public enum Role {
+        ADMIN,
         USER
     }
 

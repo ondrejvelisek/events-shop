@@ -9,7 +9,6 @@ import java.util.Objects;
 /**
  * Created by peter on 5/26/17.
  */
-
 @Entity
 public abstract class AbstractEntity implements Serializable {
 
@@ -39,8 +38,8 @@ public abstract class AbstractEntity implements Serializable {
 
     @Override
     public String toString() {
-        return this.getClass() + " " +
-                "id=" + id +
-                '}';
+        return this.getClass() + " "
+                + "id=" + id
+                + '}';
     }
 }
