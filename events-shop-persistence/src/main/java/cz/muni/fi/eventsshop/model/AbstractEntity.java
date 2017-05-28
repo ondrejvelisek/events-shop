@@ -9,7 +9,7 @@ import java.util.Objects;
 /**
  * Created by peter on 5/26/17.
  */
-@Entity
+@MappedSuperclass
 public abstract class AbstractEntity implements Serializable {
 
     public static final long serialVersionUID = 42L;
