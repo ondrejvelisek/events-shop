@@ -1,6 +1,8 @@
 package cz.muni.fi.eventsshop.security;
 
 import cz.muni.fi.eventsshop.model.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.SecurityContext;
@@ -11,6 +13,7 @@ import java.security.Principal;
  *
  */
 public class AppSecurityContext implements SecurityContext {
+	private Logger log = LoggerFactory.getLogger(this.getClass());
 
 	@Context
 	private UriInfo uriInfo;
@@ -32,7 +35,8 @@ public class AppSecurityContext implements SecurityContext {
 
 	@Override
 	public boolean isUserInRole(String s) {
-		return user.getRoles().contains(s);
+		log.trace("checking if user "+user+" has role "+s);
+		return user.getRoles().contains(User.Role.valueOf(s));
 	}
 
 	@Override
@@ -45,7 +49,4 @@ public class AppSecurityContext implements SecurityContext {
 		return user == null ? null : authScheme;
 	}
 
-	public User getUser() {
-		return user;
-	}
 }

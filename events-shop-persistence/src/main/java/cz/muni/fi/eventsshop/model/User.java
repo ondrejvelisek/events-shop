@@ -14,7 +14,7 @@ public class User extends AbstractEntity {
 	private String name;
 
 	@NotNull
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String oAuthId;
 
     @NotNull
@@ -34,14 +34,14 @@ public class User extends AbstractEntity {
         User user = (User) o;
 
         if (!getName().equals(user.getName())) return false;
-        if (!getoAuthId().equals(user.getoAuthId())) return false;
+        if (!getOAuthId().equals(user.getOAuthId())) return false;
         return getEmail().equals(user.getEmail());
     }
 
     @Override
     public int hashCode() {
         int result = getName().hashCode();
-        result = 31 * result + getoAuthId().hashCode();
+        result = 31 * result + getOAuthId().hashCode();
         result = 31 * result + getEmail().hashCode();
         return result;
     }
@@ -59,11 +59,11 @@ public class User extends AbstractEntity {
         this.name = name;
     }
 
-    public String getoAuthId() {
+    public String getOAuthId() {
         return oAuthId;
     }
 
-    public void setoAuthId(String oAuthId) {
+    public void setOAuthId(String oAuthId) {
         this.oAuthId = oAuthId;
     }
 

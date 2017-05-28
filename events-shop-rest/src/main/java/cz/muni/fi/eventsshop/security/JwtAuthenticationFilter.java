@@ -16,9 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Priority;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
 import javax.ws.rs.ForbiddenException;
 import javax.ws.rs.InternalServerErrorException;
 import javax.ws.rs.Priorities;
@@ -103,30 +100,24 @@ public class JwtAuthenticationFilter implements ContainerRequestFilter {
 
 			log.trace("JWT verified successfully.");
 
-			log.warn("HERE: " + userFacade);
-
 			JwtPrincipal principal = new JwtPrincipal(jwt);
-			User user = userFacade.getUserByExternalId(principal.getName());
+			User user = userFacade.getUserByOAuthId(principal.getName());
 
 			if (user == null) {
 				log.trace("User for principal "+principal+" has not been found. " +
 						"Creating new one.");
-//				user = userFacade.createUser(new User(
-//						principal.getName(),
-//						new HashSet<>(Arrays.asList("USER")),
-//						principal.getJwt().getClaim("name").asString(),
-//						principal.getJwt().getClaim("email").asString()
-//				));
+				user = new User();
+				user.setOAuthId(principal.getName());
+				user.setName(principal.getJwt().getClaim("name").asString());
+				user.setEmail(principal.getJwt().getClaim("email").asString());
+				user.setRoles(Arrays.asList(User.Role.USER));
+				user = userFacade.createUser(user);
 				log.trace("User has been created " + user);
 			} else {
 				log.trace("User for principal "+principal+" has been found "+user);
 				log.trace("Going to update info of user "+user+" based on principal "+principal);
-//				user.adjust(new User(
-//						user.getExternalId(),
-//						user.getRoles(),
-//						principal.getJwt().getClaim("name").asString(),
-//						principal.getJwt().getClaim("email").asString()
-//				));
+				user.setName(principal.getJwt().getClaim("name").asString());
+				user.setEmail(principal.getJwt().getClaim("email").asString());
 				userFacade.updateUser(user.getId(), user);
 				log.trace("Info of user "+user+" has been updated.");
 			}
