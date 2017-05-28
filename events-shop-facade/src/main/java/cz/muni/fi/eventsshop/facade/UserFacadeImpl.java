@@ -34,8 +34,8 @@ public class UserFacadeImpl implements UserFacade {
 	}
 
 	@Override
-	public User getUserByExternalId(String externalId) throws InternalException {
-		return service.getUserByExternalId(externalId);
+	public User getUserByOAuthId(String externalId) throws InternalException {
+		return service.getUserByOAuthId(externalId);
 	}
 
 	@Override
