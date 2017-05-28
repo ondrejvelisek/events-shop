@@ -1,6 +1,9 @@
-import {FETCH_CATEGORIES_ERROR, FETCH_CATEGORIES_START, FETCH_CATEGORIES_SUCCESS} from '../actions/categories'
+import {
+	FETCH_CATEGORIES_ERROR, FETCH_CATEGORIES_START, FETCH_CATEGORIES_SUCCESS,
+	WS_COUNT
+} from '../actions/categories'
 
-const categoriesReducer = (state = {categories: {}, updating: false}, action) => {
+const categoriesReducer = (state = {categories: {}, updating: false, viewing: {}}, action) => {
 	switch (action.type) {
 
 		case FETCH_CATEGORIES_START:
@@ -9,7 +12,10 @@ const categoriesReducer = (state = {categories: {}, updating: false}, action) =>
 		case FETCH_CATEGORIES_SUCCESS:
 			let categories = {};
 			action.categories.forEach((category) => {categories[category.id] = category});
-			return {updating: false, categories};
+			return {...state, updating: false, categories};
+
+		case WS_COUNT:
+			return {...state, viewing: action.count};
 
 		case FETCH_CATEGORIES_ERROR:
 			// TODO deal with it

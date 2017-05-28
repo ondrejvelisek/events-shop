@@ -17,8 +17,8 @@ import categoriesReducer from './reducers/categories';
 import 'bootstrap/dist/css/bootstrap.css';
 import './styles/index.css';
 import EventsShop from "./api/EventsShop";
-import {userManager} from "./userManager";
-
+import {userManager} from "./utils/userManager";
+import createWsMiddleware from "./utils/websockets";
 
 
 const reducer = combineReducers({
@@ -33,10 +33,17 @@ const oidcMiddleware = createOidcMiddleware(userManager, null, false, '/callback
 
 const routerMiddleware = createRouterMiddleware(browserHistory);
 
+const wsMiddleware = createWsMiddleware(new WebSocket("ws://localhost:8080/events-shop-rest/ws"));
+
 const store = createStore(
 	reducer,
 	compose(
-		applyMiddleware(thunk.withExtraArgument({api}), oidcMiddleware, routerMiddleware),
+		applyMiddleware(
+			thunk.withExtraArgument({api}),
+			oidcMiddleware,
+			routerMiddleware,
+			wsMiddleware
+		),
 		window.devToolsExtension ? window.devToolsExtension() : f => f
 	)
 );
