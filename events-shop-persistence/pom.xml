@@ -20,20 +20,20 @@
 
     <dependencies>
 	
-<!--		 <dependency>
-                <groupId>org.wildfly.bom</groupId>
-                <artifactId>wildfly-javaee7-with-tools</artifactId>
-                <version>${wildfly.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>-->
+        <!--		 <dependency>
+            <groupId>org.wildfly.bom</groupId>
+            <artifactId>wildfly-javaee7-with-tools</artifactId>
+            <version>${wildfly.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>-->
 		
-		<dependency>
-                <groupId>org.jboss.spec</groupId>
-                <artifactId>jboss-javaee-web-7.0</artifactId>
-                <version>${javaee7.web.spec.version}</version>
-                <type>pom</type>
-                <scope>provided</scope>
+        <dependency>
+            <groupId>org.jboss.spec</groupId>
+            <artifactId>jboss-javaee-web-7.0</artifactId>
+            <version>${javaee7.web.spec.version}</version>
+            <type>pom</type>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -52,10 +52,10 @@
                     <artifactId>slf4j-api</artifactId>
                 </exclusion>
 				
-<exclusion>
-<groupId>org.jboss.logging</groupId>
-<artifactId>jboss-logging</artifactId>
-</exclusion>
+                <exclusion>
+                    <groupId>org.jboss.logging</groupId>
+                    <artifactId>jboss-logging</artifactId>
+                </exclusion>
  
             </exclusions>
         </dependency>
@@ -68,13 +68,13 @@
             <scope>test</scope>
         </dependency>
         
-         <dependency>
-                <groupId>org.jboss.arquillian</groupId>
-                <artifactId>arquillian-bom</artifactId>
-                <version>${arquillian.version}</version>
-                <scope>provided</scope>
-                <type>pom</type>
-            </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian</groupId>
+            <artifactId>arquillian-bom</artifactId>
+            <version>${arquillian.version}</version>
+            <scope>provided</scope>
+            <type>pom</type>
+        </dependency>
 
         <!-- Optional, but highly recommended -->
         <!-- Arquillian allows you to test enterprise code such as EJBs and Transactional(JTA) JPA from JUnit/TestNG -->
@@ -90,12 +90,12 @@
             <version>${arquillian.version}</version>
             <scope>test</scope>
         </dependency>
-        <!--        <dependency>
+        <dependency>
             <groupId>org.arquillian.container</groupId>
             <artifactId>arquillian-container-chameleon</artifactId>
             <version>1.0.0.Beta2</version>
             <scope>test</scope>
-        </dependency>-->
+        </dependency>
     </dependencies>
 	
     <build>
@@ -170,32 +170,33 @@
             <!-- Run with: mvn clean test -Parq-jbossas-managed -->
             <id>arq-jbossas-managed</id>
             <dependencies>
-                <dependency>
+<!--                <dependency>
                     <groupId>org.wildfly.arquillian</groupId>
                     <artifactId>wildfly-arquillian-container-managed</artifactId>
                     <version>2.0.2.Final</version>
                     <scope>test</scope>
                     
-                </dependency>
+                </dependency>-->
 				
-				
+<!--				
                 <dependency>
                     <groupId>org.jboss.arquillian.protocol</groupId>
                     <artifactId>arquillian-protocol-servlet</artifactId>
                     <version>${arquillian.version}</version>
                     <scope>test</scope>
                 </dependency>
-				<dependency>  
-    <groupId>org.wildfly.arquillian</groupId>  
-    <artifactId>wildfly-arquillian-protocol-jmx</artifactId>
-<version>2.0.2.Final</version>	
-    <scope>test</scope>  
-</dependency>  
+                <dependency>  
+                    <groupId>org.wildfly.arquillian</groupId>  
+                    <artifactId>wildfly-arquillian-protocol-jmx</artifactId>
+                    <version>2.0.2.Final</version>	
+                    <scope>test</scope>  
+                </dependency>  -->
             </dependencies>
-                        <properties>
-                <jboss.home>${project.build.directory}/fuck-run/wildfly-${wildfly.version}</jboss.home>
-            </properties>
-            <build>
+<!--            <properties>
+                <jboss.home>${project.build.directory}/wildfly-run/wildfly-${wildfly.version}</jboss.home>
+            </properties>-->
+            
+<!--            <build>
                 <plugins>
                     <plugin>
                         <artifactId>maven-dependency-plugin</artifactId>
@@ -214,7 +215,7 @@
                                             <version>${wildfly.version}</version>
                                             <type>zip</type>
                                             <overWrite>false</overWrite>
-                                            <outputDirectory>${project.build.directory}/fuck-run</outputDirectory>
+                                            <outputDirectory>${project.build.directory}/tests</outputDirectory>
                                         </artifactItem>
                                     </artifactItems>
                                 </configuration>
@@ -222,7 +223,7 @@
                         </executions>
                     </plugin>
                 </plugins>
-            </build>
+            </build>-->
 			
         </profile>
 

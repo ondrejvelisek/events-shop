@@ -25,6 +25,30 @@ public class EventService extends AbstractEntity {
     @DecimalMin("0.00")
     private BigDecimal price;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        EventService that = (EventService) o;
+
+        if (getCount() != that.getCount()) {
+            return false;
+        }
+        return getPrice().equals(that.getPrice());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getCount();
+        result = 31 * result + getPrice().hashCode();
+        return result;
+    }
+
     public Service getService() {
         return service;
     }

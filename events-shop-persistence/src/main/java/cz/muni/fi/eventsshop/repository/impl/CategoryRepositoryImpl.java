@@ -14,7 +14,7 @@ import javax.transaction.Transactional;
  */
 
 @ApplicationScoped
-@Transactional(value = Transactional.TxType.REQUIRED)
+@Transactional
 public class CategoryRepositoryImpl implements CategoryRepository {
 
     @PersistenceContext
@@ -44,6 +44,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 
     @Override
     public void delete(Category category) {
-        manager.remove(category);
+        //manager.remove(category);
+        manager.remove(manager.getReference(Category.class, category.getId()));
     }
 }

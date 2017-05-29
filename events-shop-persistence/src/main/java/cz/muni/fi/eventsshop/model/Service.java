@@ -27,6 +27,34 @@ public class Service extends AbstractEntity {
     @ManyToOne
     private Category category;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Service service = (Service) o;
+
+        if (!getName().equals(service.getName())) {
+            return false;
+        }
+        if (!getDescription().equals(service.getDescription())) {
+            return false;
+        }
+        return getPrice().equals(service.getPrice());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getName().hashCode();
+        result = 31 * result + getDescription().hashCode();
+        result = 31 * result + getPrice().hashCode();
+        return result;
+    }
+
     public String getName() {
         return name;
     }

@@ -13,8 +13,9 @@ public class User extends AbstractEntity {
     @Column(nullable = false)
     private String name;
 
+    @NotNull
     @Column(nullable = false)
-    private String password;
+    private String oAuthId;
 
     @NotNull
     @Email
@@ -24,6 +25,34 @@ public class User extends AbstractEntity {
     @Enumerated(value = EnumType.STRING)
     @ElementCollection(fetch = FetchType.EAGER, targetClass = Role.class)
     private List<Role> roles;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        User user = (User) o;
+
+        if (!getName().equals(user.getName())) {
+            return false;
+        }
+        if (!getoAuthId().equals(user.getoAuthId())) {
+            return false;
+        }
+        return getEmail().equals(user.getEmail());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getName().hashCode();
+        result = 31 * result + getoAuthId().hashCode();
+        result = 31 * result + getEmail().hashCode();
+        return result;
+    }
 
     public enum Role {
         ADMIN,
@@ -38,12 +67,12 @@ public class User extends AbstractEntity {
         this.name = name;
     }
 
-    public String getPassword() {
-        return password;
+    public String getoAuthId() {
+        return oAuthId;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setoAuthId(String oAuthId) {
+        this.oAuthId = oAuthId;
     }
 
     public String getEmail() {
