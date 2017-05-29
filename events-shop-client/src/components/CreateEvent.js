@@ -7,7 +7,8 @@ class CreateEvent extends Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {name: '', date: '2017-08-01'}
+		this.initialState = {name: '', date: '2017-08-01'};
+		this.state = this.initialState;
 	}
 
 	nameValidationState() {
@@ -28,7 +29,12 @@ class CreateEvent extends Component {
 				name: this.state.name,
 				date: this.state.date
 			}));
+			this.resetForm();
 		}
+	}
+
+	resetForm() {
+		this.state = this.initialState;
 	}
 
 	render() {
@@ -36,23 +42,24 @@ class CreateEvent extends Component {
 		const { updating, events, active } = this.props.events_state;
 
 		return (
-            <div className="create-event">
+			<div className="create-event">
 
 				<h4 className="list-group-item-heading">Create new event</h4>
 
 				<form onSubmit={this.createNewEvent.bind(this)} disabled={updating}>
-					<FormGroup disabled={updating}
-						controlId="name"
-						validationState={this.nameValidationState()}
-					>
-						<ControlLabel>Name</ControlLabel>
-						<FormControl disabled={updating}
-							type="text"
-							value={this.state.name}
-							placeholder="type name of your new event ..."
-							onChange={this.handleChange.bind(this)}
+					<FormGroup controlId="name"
+							   validationState={this.nameValidationState()}>
+						<ControlLabel>
+							Name
+						</ControlLabel>
+						<FormControl type="text"
+									 value={this.state.name}
+									 placeholder="type name of your new event ..."
+									 onChange={this.handleChange.bind(this)}
 						/>
-						<HelpBlock>Name has to have at least 3 characters</HelpBlock>
+						<HelpBlock>
+							Name has to have at least 3 characters
+						</HelpBlock>
 					</FormGroup>
 				</form>
 

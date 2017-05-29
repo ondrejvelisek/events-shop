@@ -19,6 +19,12 @@ class EventsApi extends Api {
 		});
 	}
 
+	deleteEvent(eventId) {
+		return this.call("/events/"+eventId, {
+			method: 'DELETE'
+		});
+	}
+
 }
 
 export default EventsApi;

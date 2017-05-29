@@ -18,14 +18,18 @@ class Api {
 		}
 		return fetch(this.baseUrl + path, Object.assign({ headers }, args))
 			.then(this.checkError)
-			.then(response => response.json());
+			.then(response => {
+				if (response.status !== 204 && response.headers.get('Content-Type').includes('application/json')) {
+					return response.json()
+				}
+			});
 	}
 
 	checkError(response) {
 		if (response.ok) {
 			return response;
 		} else {
-			if (response.headers.get('Content-Type') === 'application/json') {
+			if (response.headers.get('Content-Type').includes('application/json')) {
 				return response.json().then(json => {
 					throw new Error(json.message);
 				});
