@@ -6,6 +6,7 @@ import cz.muni.fi.eventsshop.repository.UserRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
@@ -28,6 +29,18 @@ public class UserRepositoryImpl implements UserRepository {
     public User update(User user) {
         manager.merge(user);
         return user;
+    }
+
+    @Override
+    public User findByOAuthId(String oAuthId) {
+        try {
+            return manager.createQuery("select u from " + User.class.getName() + " u where u.oAuthId = :oAuthId",
+                    User.class)
+                    .setParameter("oAuthId", oAuthId)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
     @Override

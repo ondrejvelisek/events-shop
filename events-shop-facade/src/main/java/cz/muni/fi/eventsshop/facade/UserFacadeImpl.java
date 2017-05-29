@@ -1,5 +1,6 @@
 package cz.muni.fi.eventsshop.facade;
 
+import cz.muni.fi.eventsshop.exceptions.BeanNotExistsException;
 import cz.muni.fi.eventsshop.exceptions.InternalException;
 import cz.muni.fi.eventsshop.model.User;
 import cz.muni.fi.eventsshop.service.UserService;
@@ -33,15 +34,16 @@ public class UserFacadeImpl implements UserFacade {
 	}
 
 	@Override
-	public User getUserByExternalId(String externalId) throws InternalException {
-		return service.getUserByExternalId(externalId);
+	public User getUserByOAuthId(String externalId) throws InternalException {
+		return service.getUserByOAuthId(externalId);
 	}
 
 	@Override
 	public void updateUser(long id, User data) throws InternalException {
-		User user = service.getUserById(id);
-//		user.adjust(data);
-		service.updateUser(user);
+		if (service.getUserById(id) == null){
+			throw new BeanNotExistsException("User with id "+ id + " does not exist.");
+		}
+		service.updateUser(data);
 	}
 
 }

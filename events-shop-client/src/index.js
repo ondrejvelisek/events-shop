@@ -14,17 +14,23 @@ import Home from './components/Home';
 import Categories from './components/Categories';
 import Category from './components/Category';
 import categoriesReducer from './reducers/categories';
+import servicesReducer from './reducers/services';
+import eventsReducer from './reducers/events';
 import 'bootstrap/dist/css/bootstrap.css';
 import './styles/index.css';
 import EventsShop from "./api/EventsShop";
-import {userManager} from "./userManager";
-
+import {userManager} from "./utils/userManager";
+import createWsMiddleware from "./utils/websockets";
+import Service from "./components/Service";
+import Events from "./components/Events";
 
 
 const reducer = combineReducers({
-	categoriesState: categoriesReducer,
+	categories_state: categoriesReducer,
+	services_state: servicesReducer,
+	events_state: eventsReducer,
 	routing: routerReducer,
-	auth: authReducer
+	auth_state: authReducer
 });
 
 const api = new EventsShop(userManager, "http://localhost:8080/events-shop-rest/api/v0.1");
@@ -33,10 +39,17 @@ const oidcMiddleware = createOidcMiddleware(userManager, null, false, '/callback
 
 const routerMiddleware = createRouterMiddleware(browserHistory);
 
+const wsMiddleware = createWsMiddleware(new WebSocket("ws://localhost:8080/events-shop-rest/ws"));
+
 const store = createStore(
 	reducer,
 	compose(
-		applyMiddleware(thunk.withExtraArgument({api}), oidcMiddleware, routerMiddleware),
+		applyMiddleware(
+			thunk.withExtraArgument({api}),
+			oidcMiddleware,
+			routerMiddleware,
+			wsMiddleware
+		),
 		window.devToolsExtension ? window.devToolsExtension() : f => f
 	)
 );
@@ -54,6 +67,8 @@ ReactDOM.render(
 					<Route path="categories" component={Categories}>
 						<Route path=":id" component={Category}/>
 					</Route>
+					<Route path="services/:id" component={Service}/>
+					<Route path="events" component={Events}/>
 				</Route>
 			</Router>
 		</OidcProvider>

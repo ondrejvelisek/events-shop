@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router'
-import { initApp } from "../actions/categories";
+import { initApp } from "../actions";
 import { connect } from 'react-redux';
-import { userManager } from '../userManager';
+import { userManager } from '../utils/userManager';
+import { NavDropdown, MenuItem } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
+import {activateEvent} from "../actions/events";
 
 class App extends Component {
 
@@ -14,6 +17,10 @@ class App extends Component {
 
 	signin() {
 		userManager.signinRedirect({ data: { redirectUrl: window.location.pathname }});
+	}
+
+	activateEvent(eventId) {
+		this.props.dispatch(activateEvent(eventId));
 	}
 
 	render() {
@@ -29,6 +36,9 @@ class App extends Component {
 			);
 		}
 
+		const { updating, events, active } = this.props.events_state;
+		const activeEvent = events.find(event => event.id === active);
+
 		return (
 			<div className="App">
 
@@ -43,9 +53,23 @@ class App extends Component {
 								<li><Link to="/">Home</Link></li>
 								<li><Link to="/categories">Categories</Link></li>
 							</ul>
-							<p className="navbar-text navbar-right">
-								<i className="glyphicon glyphicon-shopping-cart"/> cart
-							</p>
+							<ul className="nav navbar-nav navbar-right">
+								<NavDropdown title={activeEvent ? activeEvent.name : 'cart'} id="cartMenu">
+
+									{Object.values(events).map(event =>
+										<MenuItem key={event.id}
+												  onClick={this.activateEvent.bind(this, event.id)}
+												  className={active === event.id ? 'active' : ''}>
+											{event.name}
+										</MenuItem>
+									)}
+
+									<MenuItem divider />
+									<LinkContainer to={{ pathname: '/events'}}>
+										<MenuItem><i className="glyphicon glyphicon-plus"/> Manage</MenuItem>
+									</LinkContainer>
+								</NavDropdown>
+							</ul>
 							{login}
 						</div>
 					</div>
@@ -70,9 +94,10 @@ class App extends Component {
 	}
 }
 
-const mapStateToProps = ({auth}) => {
+const mapStateToProps = ({auth_state, events_state}) => {
 	return {
-		user: auth.user
+		user: auth_state.user,
+		events_state
 	}
 };
 

@@ -20,28 +20,26 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void createUser(User user) throws InternalException {
-//		userRepository.create(user);
+		userRepository.create(user);
 	}
 
 	@Override
 	public List<User> getAllUsers() throws InternalException {
-//		return userRepository.findAll();
-		return null;
+		return userRepository.findAll();
 	}
 
 	@Override
 	public User getUserById(long id) throws InternalException {
-//		return userRepository.find(id);
-		return null;
+		return userRepository.find(id);
 	}
 
 	@Override
-	public User getUserByExternalId(String externalId) throws InternalException {
-		return null;
+	public User getUserByOAuthId(String externalId) throws InternalException {
+		return userRepository.findByOAuthId(externalId);
 	}
 
 	@Override
 	public void updateUser(User user) throws InternalException {
-//		userRepository.update(user);
+		userRepository.update(user);
 	}
 }

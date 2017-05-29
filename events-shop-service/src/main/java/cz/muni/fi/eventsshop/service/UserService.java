@@ -16,7 +16,7 @@ public interface UserService {
 
 	User getUserById(long id) throws InternalException;
 
-	User getUserByExternalId(String externalId) throws InternalException;
+	User getUserByOAuthId(String externalId) throws InternalException;
 
 	void updateUser(User user) throws InternalException;
 
