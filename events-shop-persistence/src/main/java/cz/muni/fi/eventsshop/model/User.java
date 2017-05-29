@@ -9,9 +9,9 @@ import java.util.Set;
 @Entity
 public class User extends AbstractEntity {
 
-	@NotNull
+    @NotNull
     @Column(nullable = false)
-	private String name;
+    private String name;
 
 	@NotNull
 	@Column(nullable = false, unique = true)
@@ -22,14 +22,18 @@ public class User extends AbstractEntity {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Enumerated(value= EnumType.STRING)
+    @Enumerated(value = EnumType.STRING)
     @ElementCollection(fetch = FetchType.EAGER, targetClass = Role.class)
     private Set<Role> roles;
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         User user = (User) o;
 
@@ -47,7 +51,7 @@ public class User extends AbstractEntity {
     }
 
     public enum Role {
-	    ADMIN,
+        ADMIN,
         USER
     }
 

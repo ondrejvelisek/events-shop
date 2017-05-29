@@ -13,7 +13,7 @@ public class Event extends AbstractEntity {
 
     @NotNull
     @Column(nullable = false)
-	private String name;
+    private String name;
 
     @OneToMany(fetch = FetchType.EAGER)
 	private List<EventService> eventServices = new ArrayList<>();
@@ -22,25 +22,30 @@ public class Event extends AbstractEntity {
 //    @Column(nullable = false)
 //	private BigDecimal price = BigDecimal.ZERO;
 
-	@NotNull
+    @NotNull
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
 	private Date date;
 
-	@NotNull
+    @NotNull
     @ManyToOne(optional = false)
-	private User client;
+    private User client;
 
-	@NotNull
+    @NotNull
     @Enumerated
-	private EventState state = EventState.NEW;
+    private EventState state = EventState.NEW;
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Event event = (Event) o;
+
 
         if (!getName().equals(event.getName())) return false;
         //if (!getPrice().equals(event.getPrice())) return false;
@@ -106,7 +111,7 @@ public class Event extends AbstractEntity {
     }
 
     public enum EventState {
-	    NEW,
+        NEW,
         APPROVED,
         PAID,
         FINISHED,

@@ -8,7 +8,6 @@ import java.io.Serializable;
 /**
  * Created by peter on 5/26/17.
  */
-
 @MappedSuperclass
 public abstract class AbstractEntity implements Serializable {
 
@@ -28,8 +27,8 @@ public abstract class AbstractEntity implements Serializable {
 
     @Override
     public String toString() {
-        return this.getClass() + " " +
-                "id=" + id +
-                '}';
+        return this.getClass() + " "
+                + "id=" + id
+                + '}';
     }
 }
