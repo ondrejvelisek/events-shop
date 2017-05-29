@@ -110,7 +110,7 @@ public class JwtAuthenticationFilter implements ContainerRequestFilter {
 				user.setOAuthId(principal.getName());
 				user.setName(principal.getJwt().getClaim("name").asString());
 				user.setEmail(principal.getJwt().getClaim("email").asString());
-				user.setRoles(Arrays.asList(User.Role.USER));
+				user.setRoles(new HashSet<>(Arrays.asList(User.Role.USER)));
 				user = userFacade.createUser(user);
 				log.trace("User has been created " + user);
 			} else {

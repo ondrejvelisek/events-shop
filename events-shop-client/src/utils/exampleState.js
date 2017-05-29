@@ -78,6 +78,7 @@ var state = {
 			}
 		],
 		updating: false,
+		active: 8		// event id which is currently managed
 	},
 	auth_state: {
 		user: {

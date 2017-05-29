@@ -4,7 +4,7 @@ import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 public class User extends AbstractEntity {
@@ -24,7 +24,7 @@ public class User extends AbstractEntity {
 
     @Enumerated(value= EnumType.STRING)
     @ElementCollection(fetch = FetchType.EAGER, targetClass = Role.class)
-    private List<Role> roles;
+    private Set<Role> roles;
 
     @Override
     public boolean equals(Object o) {
@@ -75,11 +75,11 @@ public class User extends AbstractEntity {
         this.email = email;
     }
 
-    public List<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 }
