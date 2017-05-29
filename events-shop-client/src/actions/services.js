@@ -45,6 +45,13 @@ export function fetchServices() {
 	return (dispatch, getState, { api }) => {
 		dispatch(fetchServicesStart());
 		api.servicesApi.getAllServices()
+			.then(services =>
+				services.map(service => {
+					const categoryId = service.category.id;
+					delete service.category;
+					return {...service, categoryId};
+				})
+			)
 			.then(services => dispatch(updateServices(services)))
 			.catch(e => dispatch(fetchServicesError(e)));
 	};

@@ -2,9 +2,11 @@ package cz.muni.fi.eventsshop.rest;
 
 import cz.muni.fi.eventsshop.exceptions.InternalException;
 import cz.muni.fi.eventsshop.facade.CategoryFacade;
+import cz.muni.fi.eventsshop.facade.EventFacade;
 import cz.muni.fi.eventsshop.facade.ServiceFacade;
 import cz.muni.fi.eventsshop.facade.UserFacade;
 import cz.muni.fi.eventsshop.model.Category;
+import cz.muni.fi.eventsshop.model.Event;
 import cz.muni.fi.eventsshop.model.Service;
 import cz.muni.fi.eventsshop.model.User;
 
@@ -16,6 +18,9 @@ import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.InternalServerErrorException;
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashSet;
 
 /**
  *
@@ -30,13 +35,15 @@ public class Application extends javax.ws.rs.core.Application {
 	private CategoryFacade categoryFacade;
 	@Inject
 	private ServiceFacade serviceFacade;
+	@Inject
+	private EventFacade eventFacade;
 
 	@PostConstruct
 	public void init() {
 		try {
 			User ondrej = new User();
 			ondrej.setOAuthId("105202389642828188450");
-			ondrej.setRoles(Arrays.asList(User.Role.USER, User.Role.ADMIN));
+			ondrej.setRoles(new HashSet<>(Arrays.asList(User.Role.USER, User.Role.ADMIN)));
 			ondrej.setName("Ondrej Velisek");
 			ondrej.setEmail("ondrejvelisek@gmail.com");
 			ondrej = userFacade.createUser(ondrej);
@@ -125,6 +132,18 @@ public class Application extends javax.ws.rs.core.Application {
 			laserGame.setPrice(BigDecimal.valueOf(180));
 			laserGame.setCategory(entertainment);
 			laserGame = serviceFacade.createService(laserGame);
+
+			Event teambuilding = new Event();
+			teambuilding.setName("Teambuilding");
+			teambuilding.setClient(ondrej);
+			teambuilding.setDate(new Date());
+			teambuilding = eventFacade.createEvent(teambuilding);
+
+			Event birthday = new Event();
+			birthday.setName("Birthday party");
+			birthday.setClient(ondrej);
+			birthday.setDate(new Date());
+			birthday = eventFacade.createEvent(birthday);
 
 		} catch (InternalException e) {
 			throw new InternalServerErrorException(e);

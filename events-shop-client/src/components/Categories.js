@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import NavItem from "./NavItem";
+import { LinkContainer } from 'react-router-bootstrap';
+import { NavItem } from "react-bootstrap";
 
 class Categories extends Component {
 
@@ -21,9 +22,9 @@ class Categories extends Component {
 
 							<div className="nav-divider"/>
 							{Object.values(categories).map(category =>
-								<NavItem key={category.id} to={"/categories/"+category.id} activeClassName="active">
-									{category.name}
-								</NavItem>
+								<LinkContainer key={category.id} to={{ pathname: '/categories/'+category.id}}>
+									<NavItem>{category.name}</NavItem>
+								</LinkContainer>
 							)}
 
 						</ul>

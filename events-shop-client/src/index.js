@@ -15,17 +15,20 @@ import Categories from './components/Categories';
 import Category from './components/Category';
 import categoriesReducer from './reducers/categories';
 import servicesReducer from './reducers/services';
+import eventsReducer from './reducers/events';
 import 'bootstrap/dist/css/bootstrap.css';
 import './styles/index.css';
 import EventsShop from "./api/EventsShop";
 import {userManager} from "./utils/userManager";
 import createWsMiddleware from "./utils/websockets";
 import Service from "./components/Service";
+import Events from "./components/Events";
 
 
 const reducer = combineReducers({
 	categories_state: categoriesReducer,
 	services_state: servicesReducer,
+	events_state: eventsReducer,
 	routing: routerReducer,
 	auth_state: authReducer
 });
@@ -65,6 +68,7 @@ ReactDOM.render(
 						<Route path=":id" component={Category}/>
 					</Route>
 					<Route path="services/:id" component={Service}/>
+					<Route path="events" component={Events}/>
 				</Route>
 			</Router>
 		</OidcProvider>

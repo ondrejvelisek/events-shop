@@ -21,9 +21,10 @@ class Service extends Component {
 	}
 
 	render() {
-		const { updating, services } = this.props.services_state;
+		const { updating, services, viewing } = this.props.services_state;
 		const id = Number(this.props.params.id);
 		const service = services.find(service => service.id === id);
+		const viewingService = viewing[id] ? viewing[id] : 0;
 		const category = service ? this.props.categories_state.categories.find(category => category.id === service.categoryId) : null;
 
 		const loaderImage = <img src={loader} style={{height: '28px'}} alt="loading"/>;
@@ -40,9 +41,16 @@ class Service extends Component {
 					<span> {updating ? loaderImage : null} </span>
 					<span>{(!(service) && !updating) ? 'Unknown service selected' : null}</span>
 				</h2>
-				<p>
-					{service ? service.description : null}
-				</p>
+				{service ? (
+					<div>
+						<p>
+							{service.description}
+						</p>
+						<p>
+							This category is being viewed by {viewingService} people
+						</p>
+					</div>
+				) : null}
 			</div>
 		);
 	}
