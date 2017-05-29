@@ -11,6 +11,20 @@
 
 	<artifactId>events-shop-service</artifactId>
 
+	<repositories>
+		<repository>
+			<id>jboss-community-repository</id>
+			<url>http://repository.jboss.org/nexus/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+
 	<dependencies>
 
 		<dependency>
@@ -29,6 +43,33 @@
 			<artifactId>cdi-api</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.spec.javax.batch</groupId>
+			<artifactId>jboss-batch-api_1.0_spec</artifactId>
+			<version>1.0.0.Final</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-web-api</artifactId>
+			<version>7.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.enterprise.concurrent</groupId>
+			<artifactId>javax.enterprise.concurrent-api</artifactId>
+			<version>1.0</version>
+		</dependency>
 	</dependencies>
 
 
