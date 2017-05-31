@@ -29,6 +29,11 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
+    public List<Event> getUpcomingEvents() throws InternalException {
+        return eventRepository.upcomingEvents();
+    }
+
+    @Override
     public Event getEventById(long id) throws InternalException {
         return eventRepository.find(id);
     }

@@ -14,6 +14,8 @@ public interface EventFacade {
 
     List<Event> getAllEvents() throws InternalException;
 
+    List<Event> getUpcomingEvents() throws InternalException;
+
     Event getEventById(long id) throws InternalException;
 
     void updateEvent(long id, Event data) throws InternalException;

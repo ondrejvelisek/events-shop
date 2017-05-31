@@ -17,5 +17,7 @@ public interface EventRepository {
 
     List<Event> findAll();
 
+    List<Event> upcomingEvents();
+
     void delete(Event event);
 }

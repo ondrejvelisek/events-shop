@@ -23,14 +23,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Demonstrates how to use the EJB's @Schedule.
- *
- * @author <a href="mailto:ozizka@redhat.com">Ondrej Zizka</a>
+ * Patrik.Cyprian
  */
 @Singleton
 public class ScheduleExample {
 
-    @Schedule(second = "*/6", minute = "*", hour = "*", persistent = false)
+    @Schedule(second = "05", minute = "04", hour = "22", persistent = false)
     public void doWork() {
         Date currentTime = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z");

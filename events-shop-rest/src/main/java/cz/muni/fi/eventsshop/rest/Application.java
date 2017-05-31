@@ -17,6 +17,7 @@ import javax.inject.Inject;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.InternalServerErrorException;
 import java.math.BigDecimal;
+import java.time.Month;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -54,6 +55,14 @@ public class Application extends javax.ws.rs.core.Application {
 			peter.setName("Peter Javorka");
 			peter.setEmail("javorka93@gmail.com");
 			userFacade.createUser(peter);
+
+			User patrik = new User();
+			patrik.setOAuthId("112491319501508959655");
+			patrik.setRoles(new HashSet<>(Arrays.asList(User.Role.USER, User.Role.ADMIN)));
+			patrik.setName("Patrik Cyprian");
+			patrik.setEmail("cyprian.patrik@gmail.com");
+			patrik = userFacade.createUser(patrik);
+
 
 			Category food = new Category();
 			food.setName("Food and drinks");
@@ -155,6 +164,20 @@ public class Application extends javax.ws.rs.core.Application {
 			birthday.setAddress("Botanicka 8");
 			birthday.setCity("Brno");
 			birthday = eventFacade.createEvent(birthday);
+
+			Event weekend = new Event();
+			weekend.setName("Weekend party");
+			weekend.setClient(patrik);
+			weekend.setDate(new Date(117, 5, 04));
+			weekend = eventFacade.createEvent(weekend);
+
+			weekend = new Event();
+			weekend.setName("Weekend party 2 = AfterParty");
+			weekend.setClient(patrik);
+			weekend.setDate(new Date(117,5,05));
+			weekend = eventFacade.createEvent(weekend);
+
+			System.out.println("EVENTYYYYYYYYYYYYYYYYYYYYYY" + eventFacade.getUpcomingEvents());
 
 		} catch (InternalException e) {
 			throw new InternalServerErrorException(e);

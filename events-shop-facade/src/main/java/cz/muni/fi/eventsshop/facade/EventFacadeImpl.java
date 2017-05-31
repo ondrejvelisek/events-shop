@@ -32,6 +32,11 @@ public class EventFacadeImpl implements EventFacade {
     }
 
     @Override
+    public List<Event> getUpcomingEvents() throws InternalException {
+        return service.getUpcomingEvents();
+    }
+
+    @Override
     public Event getEventById(long id) throws InternalException {
         return service.getEventById(id);
     }

@@ -13,6 +13,8 @@ public interface EventService {
 
     List<Event> getAllEvents() throws InternalException;
 
+    List<Event> getUpcomingEvents() throws InternalException;
+
     Event getEventById(long id) throws InternalException;
 
     void updateEvent(Event event) throws InternalException;
