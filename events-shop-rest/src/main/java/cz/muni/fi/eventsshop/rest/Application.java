@@ -144,12 +144,16 @@ public class Application extends javax.ws.rs.core.Application {
 			teambuilding.setName("Teambuilding");
 			teambuilding.setClient(ondrej);
 			teambuilding.setDate(new Date());
+			teambuilding.setAddress("Luzanecka 4");
+			teambuilding.setCity("Brno");
 			teambuilding = eventFacade.createEvent(teambuilding);
 
 			Event birthday = new Event();
 			birthday.setName("Birthday party");
 			birthday.setClient(ondrej);
 			birthday.setDate(new Date());
+			birthday.setAddress("Botanicka 8");
+			birthday.setCity("Brno");
 			birthday = eventFacade.createEvent(birthday);
 
 		} catch (InternalException e) {
