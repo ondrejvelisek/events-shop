@@ -168,16 +168,18 @@ public class Application extends javax.ws.rs.core.Application {
 			Event weekend = new Event();
 			weekend.setName("Weekend party");
 			weekend.setClient(patrik);
+			weekend.setCity("Brno");
+			weekend.setAddress("FI MUNI");
 			weekend.setDate(new Date(117, 5, 04));
 			weekend = eventFacade.createEvent(weekend);
 
 			weekend = new Event();
 			weekend.setName("Weekend party 2 = AfterParty");
+			weekend.setCity("Brno");
+			weekend.setAddress("FI MUNI");
 			weekend.setClient(patrik);
 			weekend.setDate(new Date(117,5,05));
 			weekend = eventFacade.createEvent(weekend);
-
-			System.out.println("EVENTYYYYYYYYYYYYYYYYYYYYYY" + eventFacade.getUpcomingEvents());
 
 		} catch (InternalException e) {
 			throw new InternalServerErrorException(e);

@@ -2,16 +2,13 @@ package cz.muni.fi.eventsshop.rest.batching;
 
 import com.sun.mail.smtp.SMTPMessage;
 import cz.muni.fi.eventsshop.facade.EventFacade;
-import cz.muni.fi.eventsshop.facade.UserFacade;
 import cz.muni.fi.eventsshop.facade.WeatherFacade;
 import cz.muni.fi.eventsshop.model.Event;
-import cz.muni.fi.eventsshop.service.EventService;
 import cz.muni.fi.eventsshop.service.impl.Weather;
 
-import javax.batch.api.BatchProperty;
+
 import javax.batch.api.Batchlet;
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.mail.*;
@@ -39,7 +36,7 @@ public class SimpleBatchlet2 implements Batchlet {
 
         for(int i = 0; i < events.size(); i++) {
 
-            Weather w = weatherFacade.getWeatherForecast("Brno");
+            Weather w = weatherFacade.getWeatherForecast(events.get(i).getCity());
 
             Properties props = new Properties();
             props.put("mail.smtp.host", "smtp.gmail.com");
@@ -65,8 +62,9 @@ public class SimpleBatchlet2 implements Batchlet {
 
                 message.setSubject("You have upcoming event");
                 message.setText("Hi, "+ events.get(i).getClient().getName() +"\n" +
-                        "we are sending you informations about your upcoming event.\n" +
+                        "we are sending you informations about your upcoming event - "+ events.get(i).getName() +".\n" +
                         "Date: " + events.get(i).getDate() + "\n" +
+                        "Place: " + events.get(i).getAddress() + ", " + events.get(i).getCity() + "\n" +
                         "Weather: \n" +
                         "  Temperature: " + w.getTemperature() + " Celsius\n" +
                         "  Clouds: " + w.getCloudDescription() + " \n" +
