@@ -53,12 +53,10 @@ public class EventServiceRepositoryTest {
         
         eventService = new EventService();
         eventService.setCount(1);
-        eventService.setPrice(BigDecimal.ONE);
         eventService.setService(service);
         
         eventService2 = new EventService();
         eventService2.setCount(2);
-        eventService2.setPrice(BigDecimal.TEN);
         eventService2.setService(service);
         
     } 
@@ -81,7 +79,7 @@ public class EventServiceRepositoryTest {
     @Transactional(TransactionMode.ROLLBACK)
     public void testUpdate() {
         eventServiceRepository.create(eventService);
-        eventService.setPrice(BigDecimal.TEN);
+        eventService.setCount(10);
         eventServiceRepository.update(eventService);
         Assert.assertEquals(eventService, eventServiceRepository.find(eventService.getId()));
 
