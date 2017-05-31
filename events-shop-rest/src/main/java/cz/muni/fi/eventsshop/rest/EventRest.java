@@ -1,6 +1,7 @@
 package cz.muni.fi.eventsshop.rest;
 
 import cz.muni.fi.eventsshop.exceptions.InternalException;
+import cz.muni.fi.eventsshop.facade.DTO.EventDTO;
 import cz.muni.fi.eventsshop.model.Event;
 
 import javax.ws.rs.*;
@@ -15,21 +16,21 @@ public interface EventRest {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    Event createEvent(Event event) throws InternalException;
+    EventDTO createEvent(EventDTO event) throws InternalException;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    List<Event> getAllEvents() throws InternalException;
+    List<EventDTO> getAllEvents() throws InternalException;
 
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    Event getEventById(@PathParam("id") long id) throws InternalException;
+    EventDTO getEventById(@PathParam("id") long id) throws InternalException;
 
     @PUT
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    void updateEvent(@PathParam("id") long id, Event event) throws InternalException;
+    void updateEvent(@PathParam("id") long id, EventDTO event) throws InternalException;
 
     @DELETE
     @Path("/{id}")

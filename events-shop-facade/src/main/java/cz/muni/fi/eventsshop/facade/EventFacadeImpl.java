@@ -2,7 +2,9 @@ package cz.muni.fi.eventsshop.facade;
 
 import cz.muni.fi.eventsshop.exceptions.BeanNotExistsException;
 import cz.muni.fi.eventsshop.exceptions.InternalException;
+import cz.muni.fi.eventsshop.facade.DTO.EventDTO;
 import cz.muni.fi.eventsshop.model.Event;
+import cz.muni.fi.eventsshop.service.BeanMappingService;
 import cz.muni.fi.eventsshop.service.EventService;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -20,15 +22,20 @@ public class EventFacadeImpl implements EventFacade {
     @Inject
     private EventService service;
 
+
+    @Inject
+    private BeanMappingService beanMappingService;
+
     @Override
-    public Event createEvent(Event data) throws InternalException {
-        service.createEvent(data);
-        return service.getEventById(data.getId());
+    public EventDTO createEvent(EventDTO data) throws InternalException {
+        Event event = beanMappingService.mapTo(data, Event.class);
+        service.createEvent(event);
+        return beanMappingService.mapTo(data, EventDTO.class);
     }
 
     @Override
-    public List<Event> getAllEvents() throws InternalException {
-        return service.getAllEvents();
+    public List<EventDTO> getAllEvents() throws InternalException {
+        return beanMappingService.mapTo(service.getAllEvents(), EventDTO.class);
     }
 
     @Override
@@ -37,16 +44,17 @@ public class EventFacadeImpl implements EventFacade {
     }
 
     @Override
-    public Event getEventById(long id) throws InternalException {
-        return service.getEventById(id);
+    public EventDTO getEventById(long id) throws InternalException {
+        return beanMappingService.mapTo(service.getEventById(id), EventDTO.class);
     }
 
     @Override
-    public void updateEvent(long id, Event data) throws InternalException {
+    public void updateEvent(long id, EventDTO data) throws InternalException {
         if (service.getEventById(id) == null){
             throw new BeanNotExistsException("Event with id "+ id + " does not exist.");
         }
-        service.updateEvent(data);
+        Event event = beanMappingService.mapTo(data, Event.class);
+        service.updateEvent(event);
     }
 
     @Override

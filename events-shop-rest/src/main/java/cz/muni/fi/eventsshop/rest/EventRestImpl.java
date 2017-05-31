@@ -1,6 +1,7 @@
 package cz.muni.fi.eventsshop.rest;
 
 import cz.muni.fi.eventsshop.exceptions.InternalException;
+import cz.muni.fi.eventsshop.facade.DTO.EventDTO;
 import cz.muni.fi.eventsshop.facade.EventFacade;
 import cz.muni.fi.eventsshop.model.Event;
 
@@ -20,22 +21,22 @@ public class EventRestImpl implements EventRest {
     private EventFacade facade;
 
     @Override
-    public Event createEvent(Event event) throws InternalException {
+    public EventDTO createEvent(EventDTO event) throws InternalException {
         return facade.createEvent(event);
     }
 
     @Override
-    public List<Event> getAllEvents() throws InternalException {
+    public List<EventDTO> getAllEvents() throws InternalException {
         return facade.getAllEvents();
     }
 
     @Override
-    public Event getEventById(long id) throws InternalException {
+    public EventDTO getEventById(long id) throws InternalException {
         return facade.getEventById(id);
     }
 
     @Override
-    public void updateEvent(long id, Event event) throws InternalException {
+    public void updateEvent(long id, EventDTO event) throws InternalException {
         facade.updateEvent(id, event);
     }
 

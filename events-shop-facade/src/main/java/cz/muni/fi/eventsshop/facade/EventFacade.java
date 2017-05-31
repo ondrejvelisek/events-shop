@@ -1,6 +1,7 @@
 package cz.muni.fi.eventsshop.facade;
 
 import cz.muni.fi.eventsshop.exceptions.InternalException;
+import cz.muni.fi.eventsshop.facade.DTO.EventDTO;
 import cz.muni.fi.eventsshop.model.Event;
 
 import java.util.List;
@@ -10,15 +11,15 @@ import java.util.List;
  */
 public interface EventFacade {
 
-    Event createEvent(Event data) throws InternalException;
+    EventDTO createEvent(EventDTO data) throws InternalException;
 
-    List<Event> getAllEvents() throws InternalException;
+    List<EventDTO> getAllEvents() throws InternalException;
 
     List<Event> getUpcomingEvents() throws InternalException;
 
-    Event getEventById(long id) throws InternalException;
+    EventDTO getEventById(long id) throws InternalException;
 
-    void updateEvent(long id, Event data) throws InternalException;
+    void updateEvent(long id, EventDTO data) throws InternalException;
 
     void deleteEvent(long id) throws InternalException;
 }
