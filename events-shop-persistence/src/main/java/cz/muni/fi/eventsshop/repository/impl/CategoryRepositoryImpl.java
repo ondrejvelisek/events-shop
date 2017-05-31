@@ -7,14 +7,12 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
-import javax.transaction.Transactional;
 
 /**
  * Created by peter on 5/26/17.
  */
 
 @ApplicationScoped
-@Transactional
 public class CategoryRepositoryImpl implements CategoryRepository {
 
     @PersistenceContext
@@ -44,7 +42,6 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 
     @Override
     public void delete(Category category) {
-        //manager.remove(category);
-        manager.remove(manager.getReference(Category.class, category.getId()));
+        manager.remove(category);
     }
 }

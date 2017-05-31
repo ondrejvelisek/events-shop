@@ -42,15 +42,7 @@ public class Category extends AbstractEntity {
         hash = 53 * hash + Objects.hashCode(this.name);
         hash = 53 * hash + Objects.hashCode(this.description);
         return hash;
-    }
-    
-
-//    @Override
-//    public int hashCode() {
-//        int result = getName().hashCode();
-//        result = 31 * result + getDescription().hashCode();
-//        return result;
-//    }
+    }    
 
     public String getName() {
         return name;

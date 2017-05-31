@@ -20,8 +20,8 @@
          database. Production applications should use a managed datasource. -->
       <!-- The datasource is deployed as WEB-INF/test-ds.xml, 
          you can find it in the source at src/test/resources/test-ds.xml -->
-      <jta-data-source>java:jboss/datasources/TestDS</jta-data-source>
-      <class>cz.muni.fi.eventsshop.model.Category</class>
+      <jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
+<!--      <class>cz.muni.fi.eventsshop.model.Category</class>-->
       <properties>
          <!-- Properties for Hibernate -->
          <property name="hibernate.hbm2ddl.auto" value="create-drop" />

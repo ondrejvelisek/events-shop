@@ -13,21 +13,47 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <arquillian.version>1.1.5.Final</arquillian.version>
         <javaee7.web.spec.version>1.1.0.Final</javaee7.web.spec.version>
         <wildfly.version>10.1.0.Final</wildfly.version>
+        <version.arquillian_core>1.1.13.Final</version.arquillian_core>
+        <version.arquillian_transaction>1.0.3.Final</version.arquillian_transaction>
+        <version.arquillian_extension>1.0.0.Alpha7</version.arquillian_extension>
+        <version.arquillian_chameleon>1.0.0.Beta2</version.arquillian_chameleon>
+        <!--        <version.shrinkwrap.resolver>3.0.0-alpha-4</version.shrinkwrap.resolver>-->
     </properties>
+    
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>org.jboss.arquillian</groupId>
+                <artifactId>arquillian-bom</artifactId>
+                <version>${version.arquillian_core}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.arquillian.core</groupId>
+                <artifactId>arquillian-core-impl-base</artifactId>
+                <classifier>tests</classifier>
+                <version>${version.arquillian_core}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.arquillian.extension</groupId>
+                <artifactId>arquillian-transaction-bom</artifactId>
+                <version>${version.arquillian_transaction}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+      
+        </dependencies>
+
+    </dependencyManagement>
 
     <dependencies>
-	
-        <!--		 <dependency>
-            <groupId>org.wildfly.bom</groupId>
-            <artifactId>wildfly-javaee7-with-tools</artifactId>
-            <version>${wildfly.version}</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>-->
-		
+	      		
         <dependency>
             <groupId>org.jboss.spec</groupId>
             <artifactId>jboss-javaee-web-7.0</artifactId>
@@ -44,23 +70,16 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>5.0.1.Final</version>
+            <version>5.4.1.Final</version>
             <scope>provided</scope>
             <exclusions>
                 <exclusion>
                     <groupId>org.slf4j</groupId>
                     <artifactId>slf4j-api</artifactId>
                 </exclusion>
-				
-                <exclusion>
-                    <groupId>org.jboss.logging</groupId>
-                    <artifactId>jboss-logging</artifactId>
-                </exclusion>
- 
             </exclusions>
         </dependency>
 
-        <!-- Needed for running tests (you may also use TestNG) -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -69,31 +88,40 @@
         </dependency>
         
         <dependency>
-            <groupId>org.jboss.arquillian</groupId>
-            <artifactId>arquillian-bom</artifactId>
-            <version>${arquillian.version}</version>
-            <scope>provided</scope>
-            <type>pom</type>
+            <groupId>org.jboss.arquillian.extension</groupId>
+            <artifactId>arquillian-persistence-api</artifactId>
+            <version>${version.arquillian_extension}</version>
+            <scope>test</scope>
         </dependency>
-
-        <!-- Optional, but highly recommended -->
-        <!-- Arquillian allows you to test enterprise code such as EJBs and Transactional(JTA) JPA from JUnit/TestNG -->
+        
+        <dependency>
+            <groupId>org.jboss.arquillian.extension</groupId>
+            <artifactId>arquillian-persistence-core</artifactId>
+            <version>${version.arquillian_extension}</version>
+            <scope>test</scope>     
+        </dependency>
+               
+        <dependency>
+            <groupId>org.jboss.arquillian.extension</groupId>
+            <artifactId>arquillian-transaction-jta</artifactId>
+            <scope>test</scope>
+        </dependency>
+              
         <dependency>
             <groupId>org.jboss.arquillian.core</groupId>
             <artifactId>arquillian-core-api</artifactId>
-            <version>${arquillian.version}</version>
             <scope>test</scope>
         </dependency>
+        
         <dependency>
             <groupId>org.jboss.arquillian.junit</groupId>
             <artifactId>arquillian-junit-container</artifactId>
-            <version>${arquillian.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.arquillian.container</groupId>
             <artifactId>arquillian-container-chameleon</artifactId>
-            <version>1.0.0.Beta2</version>
+            <version>${version.arquillian_chameleon}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -127,106 +155,9 @@
             </plugin>
         </plugins>
     </build>
-	
-	
+		
     <profiles>
-        <profile>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-
-            <!-- We add the JBoss repository as we need the JBoss AS connectors for Arquillian -->
-            <!--            <repositories>
-                 The JBoss Community public repository is a composite repository of several major repositories 
-                 see http://community.jboss.org/wiki/MavenGettingStarted-Users 
-                <repository>
-                    <id>jboss-public-repository</id>
-                    <name>JBoss Repository</name>
-                    <url>http://repository.jboss.org/nexus/content/groups/public</url>
-                     These optional flags are designed to speed up your builds by reducing remote server calls 
-                    <releases>
-                    </releases>
-                    <snapshots>
-                        <enabled>false</enabled>
-                    </snapshots>
-                </repository>
-            </repositories>-->
-
-            <!--            <pluginRepositories>
-                <pluginRepository>
-                    <id>jboss-public-repository</id>
-                    <name>JBoss Repository</name>
-                    <url>http://repository.jboss.org/nexus/content/groups/public</url>
-                    <releases>
-                    </releases>
-                    <snapshots>
-                        <enabled>false</enabled>
-                    </snapshots>
-                </pluginRepository>
-            </pluginRepositories>-->
-
-            <!-- An optional Arquillian testing profile that executes tests in your JBoss AS instance -->
-            <!-- This profile will start a new JBoss AS instance, and execute the test, shutting it down when done -->
-            <!-- Run with: mvn clean test -Parq-jbossas-managed -->
-            <id>arq-jbossas-managed</id>
-            <dependencies>
-<!--                <dependency>
-                    <groupId>org.wildfly.arquillian</groupId>
-                    <artifactId>wildfly-arquillian-container-managed</artifactId>
-                    <version>2.0.2.Final</version>
-                    <scope>test</scope>
-                    
-                </dependency>-->
-				
-<!--				
-                <dependency>
-                    <groupId>org.jboss.arquillian.protocol</groupId>
-                    <artifactId>arquillian-protocol-servlet</artifactId>
-                    <version>${arquillian.version}</version>
-                    <scope>test</scope>
-                </dependency>
-                <dependency>  
-                    <groupId>org.wildfly.arquillian</groupId>  
-                    <artifactId>wildfly-arquillian-protocol-jmx</artifactId>
-                    <version>2.0.2.Final</version>	
-                    <scope>test</scope>  
-                </dependency>  -->
-            </dependencies>
-<!--            <properties>
-                <jboss.home>${project.build.directory}/wildfly-run/wildfly-${wildfly.version}</jboss.home>
-            </properties>-->
-            
-<!--            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-dependency-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>unpack</id>
-                                <phase>process-test-classes</phase>
-                                <goals>
-                                    <goal>unpack</goal>
-                                </goals>
-                                <configuration>
-                                    <artifactItems>
-                                        <artifactItem>
-                                            <groupId>org.wildfly</groupId>
-                                            <artifactId>wildfly-dist</artifactId>
-                                            <version>${wildfly.version}</version>
-                                            <type>zip</type>
-                                            <overWrite>false</overWrite>
-                                            <outputDirectory>${project.build.directory}/tests</outputDirectory>
-                                        </artifactItem>
-                                    </artifactItems>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>-->
-			
-        </profile>
-
+       
         <profile>
             <!-- When built in OpenShift the 'openshift' profile will be used when invoking mvn -->
             <!-- Use this profile for any OpenShift specific customization your app will need -->

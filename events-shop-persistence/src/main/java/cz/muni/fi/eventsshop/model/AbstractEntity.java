@@ -4,6 +4,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
+import javax.persistence.GenerationType;
 
 /**
  * Created by peter on 5/26/17.
@@ -11,9 +12,9 @@ import java.io.Serializable;
 @MappedSuperclass
 public abstract class AbstractEntity implements Serializable {
 
-    public static final long serialVersionUID = 42L;
+    public static final long serialVersionUID = 1345644414208496L;
 
-    @GeneratedValue
+    @GeneratedValue (strategy=GenerationType.IDENTITY)
     @Id
     private Long id;
 
