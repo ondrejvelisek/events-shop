@@ -1,7 +1,8 @@
 import {
 	FETCH_CATEGORIES_START, FETCH_CATEGORIES_ERROR, FETCH_CATEGORIES_SUCCESS,
 	CREATE_CATEGORY_START, CREATE_CATEGORY_ERROR, CREATE_CATEGORY_SUCCESS,
-	UPDATE_CATEGORY_START, UPDATE_CATEGORY_ERROR, UPDATE_CATEGORY_SUCCESS
+	UPDATE_CATEGORY_START, UPDATE_CATEGORY_ERROR, UPDATE_CATEGORY_SUCCESS,
+	FETCH_CATEGORY_SUCCESS
 } from '../actions/categories'
 
 const categoriesReducer = (state = {categories: [], updating: false}, action) => {
@@ -49,6 +50,9 @@ const categoriesReducer = (state = {categories: [], updating: false}, action) =>
 
 		case FETCH_CATEGORIES_SUCCESS:
 			return {...state, updating: false, categories: action.categories};
+
+		case FETCH_CATEGORY_SUCCESS:
+			return {...state, updating: false, category: action.category};
 
 		default:
 			return state;

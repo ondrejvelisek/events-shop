@@ -12,6 +12,10 @@ export const UPDATE_CATEGORY_START = 'UPDATE_CATEGORY_START';
 export const UPDATE_CATEGORY_ERROR = 'UPDATE_CATEGORY_ERROR';
 export const UPDATE_CATEGORY_SUCCESS = 'UPDATE_CATEGORY_SUCCESS';
 
+export const FETCH_CATEGORY_START = 'FETCH_CATEGORY_START';
+export const FETCH_CATEGORY_ERROR = 'FETCH_CATEGORY_ERROR';
+export const FETCH_CATEGORY_SUCCESS = 'FETCH_CATEGORY_SUCCESS';
+
 export const RESET_CATEGORY_FORM = 'RESET_CATEGORY_FORM';
 
 
@@ -33,6 +37,23 @@ function fetchCategoriesSuccess(categories) {
 		categories
 	};
 }
+function fetchCategoryStart() {
+	return {
+		type: FETCH_CATEGORIES_START
+	};
+}
+function fetchCategoryError(error) {
+	return {
+		type: FETCH_CATEGORIES_ERROR,
+		error
+	};
+}
+function fetchCategorySuccess(category) {
+	return {
+		type: FETCH_CATEGORIES_SUCCESS,
+		category
+	};
+}
 export function fetchCategories() {
 	return (dispatch, getState, { api }) => {
 		dispatch(fetchCategoriesStart());
@@ -40,6 +61,15 @@ export function fetchCategories() {
 			.then(categories => dispatch(fetchCategoriesSuccess(categories)))
 			.catch(e => dispatch(fetchCategoriesError(e)));
 	};
+}
+
+export function fetchCategory(id) {
+    return (dispatch, getState, { api }) => {
+        dispatch(fetchCategoryStart());
+        api.categoriesApi.getCategoryById(id)
+            .then(category => dispatch(fetchCategorySuccess(category)))
+            .catch(e => dispatch(fetchCategoryError(e)));
+    };
 }
 
 
