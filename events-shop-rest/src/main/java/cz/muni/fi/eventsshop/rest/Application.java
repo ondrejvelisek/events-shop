@@ -2,6 +2,8 @@ package cz.muni.fi.eventsshop.rest;
 
 import cz.muni.fi.eventsshop.exceptions.InternalException;
 import cz.muni.fi.eventsshop.facade.CategoryFacade;
+import cz.muni.fi.eventsshop.facade.DTO.EventDTO;
+import cz.muni.fi.eventsshop.facade.DTO.ServiceDTO;
 import cz.muni.fi.eventsshop.facade.EventFacade;
 import cz.muni.fi.eventsshop.facade.ServiceFacade;
 import cz.muni.fi.eventsshop.facade.UserFacade;
@@ -79,77 +81,77 @@ public class Application extends javax.ws.rs.core.Application {
 			transportation.setDescription("We will take all of you to the event place and back. Or do you prefer luxury limousine?");
 			transportation = categoryFacade.createCategory(transportation);
 
-			Service coffee = new Service();
+			ServiceDTO coffee = new ServiceDTO();
 			coffee.setName("Coffee and tea");
 			coffee.setDescription("Coffee break including coffee, tea, water and cookies");
 			coffee.setPrice(BigDecimal.valueOf(22));
 			coffee.setCategory(food);
 			coffee = serviceFacade.createService(coffee);
 
-			Service raut = new Service();
+			ServiceDTO raut = new ServiceDTO();
 			raut.setName("Raut");
 			raut.setDescription("Common table full of salty and sweet meals with plates where anybody can get what s/he wants");
 			raut.setPrice(BigDecimal.valueOf(55));
 			raut.setCategory(food);
 			raut = serviceFacade.createService(raut);
 
-			Service dinner = new Service();
+			ServiceDTO dinner = new ServiceDTO();
 			dinner.setName("Dinner");
 			dinner.setDescription("Proper fancy dinner in restaurant");
 			dinner.setPrice(BigDecimal.valueOf(160));
 			dinner.setCategory(food);
 			dinner = serviceFacade.createService(dinner);
 
-			Service drinks = new Service();
+			ServiceDTO drinks = new ServiceDTO();
 			drinks.setName("Drink");
 			drinks.setDescription("Beer, wine, coctails, and more");
 			drinks.setPrice(BigDecimal.valueOf(155));
 			drinks.setCategory(food);
 			drinks = serviceFacade.createService(drinks);
 
-			Service minibus = new Service();
+			ServiceDTO minibus = new ServiceDTO();
 			minibus.setName("Minibus");
 			minibus.setDescription("Best an cheapest way how to transport group of people together");
 			minibus.setPrice(BigDecimal.valueOf(108));
 			minibus.setCategory(transportation);
 			minibus = serviceFacade.createService(minibus);
 
-			Service limousine = new Service();
+			ServiceDTO limousine = new ServiceDTO();
 			limousine.setName("Limousine");
 			limousine.setDescription("Always a good way how to arrive to any social event");
 			limousine.setPrice(BigDecimal.valueOf(565));
 			limousine.setCategory(transportation);
 			limousine = serviceFacade.createService(limousine);
 
-			Service dj = new Service();
+			ServiceDTO dj = new ServiceDTO();
 			dj.setName("DJ music");
 			dj.setDescription("Want to wake up your guests with some dance? This is for you");
 			dj.setPrice(BigDecimal.valueOf(1050));
 			dj.setCategory(entertainment);
 			dj = serviceFacade.createService(dj);
 
-			Service liveMusic = new Service();
+			ServiceDTO liveMusic = new ServiceDTO();
 			liveMusic.setName("Music band");
 			liveMusic.setDescription("We are able to find proper band specially for your event");
 			liveMusic.setPrice(BigDecimal.valueOf(1900));
 			liveMusic.setCategory(entertainment);
 			liveMusic = serviceFacade.createService(liveMusic);
 
-			Service moderator = new Service();
+			ServiceDTO moderator = new ServiceDTO();
 			moderator.setName("Moderator");
 			moderator.setDescription("Professional who will guide your event whole evening");
 			moderator.setPrice(BigDecimal.valueOf(1500));
 			moderator.setCategory(entertainment);
 			moderator = serviceFacade.createService(moderator);
 
-			Service laserGame = new Service();
+			ServiceDTO laserGame = new ServiceDTO();
 			laserGame.setName("Laser game");
 			laserGame.setDescription("Ideal way how to develope healthy relationships in your team");
 			laserGame.setPrice(BigDecimal.valueOf(180));
 			laserGame.setCategory(entertainment);
 			laserGame = serviceFacade.createService(laserGame);
 
-			Event teambuilding = new Event();
+			EventDTO teambuilding = new EventDTO();
 			teambuilding.setName("Teambuilding");
 			teambuilding.setClient(ondrej);
 			teambuilding.setDate(new Date());
@@ -157,7 +159,7 @@ public class Application extends javax.ws.rs.core.Application {
 			teambuilding.setCity("Brno");
 			teambuilding = eventFacade.createEvent(teambuilding);
 
-			Event birthday = new Event();
+			EventDTO birthday = new EventDTO();
 			birthday.setName("Birthday party");
 			birthday.setClient(ondrej);
 			birthday.setDate(new Date());
@@ -165,7 +167,7 @@ public class Application extends javax.ws.rs.core.Application {
 			birthday.setCity("Brno");
 			birthday = eventFacade.createEvent(birthday);
 
-			Event weekend = new Event();
+			EventDTO weekend = new EventDTO();
 			weekend.setName("Weekend party");
 			weekend.setClient(patrik);
 			weekend.setCity("Brno");
@@ -173,7 +175,7 @@ public class Application extends javax.ws.rs.core.Application {
 			weekend.setDate(new Date(117, 5, 04));
 			weekend = eventFacade.createEvent(weekend);
 
-			weekend = new Event();
+			weekend = new EventDTO();
 			weekend.setName("Weekend party 2 = AfterParty");
 			weekend.setCity("Brno");
 			weekend.setAddress("FI MUNI");
