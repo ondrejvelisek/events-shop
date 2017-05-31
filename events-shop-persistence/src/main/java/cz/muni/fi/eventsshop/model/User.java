@@ -1,53 +1,66 @@
 package cz.muni.fi.eventsshop.model;
 
+import java.util.Objects;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
+import javax.validation.constraints.Size;
 
 @Entity
 public class User extends AbstractEntity {
 
-	@NotNull
+    @NotNull
     @Column(nullable = false)
-	private String name;
+    @Size(min = 1, max = 32)
+    private String name;
 
-	@NotNull
-	@Column(nullable = false, unique = true)
-	private String oAuthId;
+    @NotNull
+    @Column(nullable = false, unique = true)
+    private String oAuthId;
 
     @NotNull
     @Email
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Enumerated(value= EnumType.STRING)
+    @Enumerated(value = EnumType.STRING)
     @ElementCollection(fetch = FetchType.EAGER, targetClass = Role.class)
     private Set<Role> roles;
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         User user = (User) o;
 
-        if (!getName().equals(user.getName())) return false;
-        if (!getOAuthId().equals(user.getOAuthId())) return false;
+        if (!getName().equals(user.getName())) {
+            return false;
+        }
+        if (!getOAuthId().equals(user.getOAuthId())) {
+            return false;
+        }
         return getEmail().equals(user.getEmail());
     }
 
     @Override
     public int hashCode() {
-        int result = getName().hashCode();
-        result = 31 * result + getOAuthId().hashCode();
-        result = 31 * result + getEmail().hashCode();
-        return result;
-    }
+        int hash = 17;
+        hash = 83 * hash + Objects.hashCode(this.name);
+        hash = 83 * hash + Objects.hashCode(this.oAuthId);
+        hash = 83 * hash + Objects.hashCode(this.email);
+        hash = 83 * hash + Objects.hashCode(this.roles);
+        return hash;
+    }    
 
     public enum Role {
-	    ADMIN,
+        ADMIN,
         USER
     }
 

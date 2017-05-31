@@ -11,6 +11,7 @@ import java.util.List;
 /**
  * Created by peter on 5/26/17.
  */
+
 @ApplicationScoped
 public class CategoryRepositoryImpl implements CategoryRepository {
 

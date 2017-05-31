@@ -72,14 +72,7 @@
 				<version>1.2</version>
 				<scope>provided</scope>
 			</dependency>
-
-			<dependency>
-				<groupId>javax.transaction</groupId>
-				<artifactId>javax.transaction-api</artifactId>
-				<version>1.2</version>
-				<scope>provided</scope>
-			</dependency>
-
+			
 			<dependency>
 				<groupId>javax.ws.rs</groupId>
 				<artifactId>javax.ws.rs-api</artifactId>
@@ -175,5 +168,4 @@
 
 		</plugins>
 	</build>
-
 </project>
