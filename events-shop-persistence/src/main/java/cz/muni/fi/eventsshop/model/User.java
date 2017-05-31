@@ -6,12 +6,14 @@ import org.hibernate.validator.constraints.Email;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
+import javax.validation.constraints.Size;
 
 @Entity
 public class User extends AbstractEntity {
 
     @NotNull
     @Column(nullable = false)
+    @Size(min = 1, max = 32)
     private String name;
 
     @NotNull

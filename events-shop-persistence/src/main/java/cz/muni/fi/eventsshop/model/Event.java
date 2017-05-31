@@ -19,9 +19,6 @@ public class Event extends AbstractEntity {
     @OneToMany(fetch = FetchType.EAGER)
     private List<EventService> eventServices = new ArrayList<>();
 
-//	@DecimalMin("0.00")
-//    @Column(nullable = false)
-//	private BigDecimal price = BigDecimal.ZERO;
     @NotNull
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
@@ -83,13 +80,6 @@ public class Event extends AbstractEntity {
         this.eventServices = eventServices;
     }
 
-//    public BigDecimal getPrice() {
-//        return price;
-//    }
-//
-//    public void setPrice(BigDecimal price) {
-//        this.price = price;
-//    }
     public Date getDate() {
         return date;
     }
