@@ -2,6 +2,7 @@
 export const FETCH_USER_ME_START = "FETCH_USER_ME_START";
 export const FETCH_USER_ME_ERROR = "FETCH_USER_ME_ERROR";
 export const FETCH_USER_ME_SUCCESS = "FETCH_USER_ME_SUCCESS";
+export const USER_EXPIRED = "redux-oidc/USER_EXPIRED";
 
 function fetchUserMeStart() {
 	return {
@@ -19,7 +20,7 @@ function fetchUserMeError(error) {
 export function fetchUserMeSuccess(user) {
 	return {
 		type: FETCH_USER_ME_SUCCESS,
-		user
+		user: user
 	};
 }
 

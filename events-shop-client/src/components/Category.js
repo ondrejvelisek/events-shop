@@ -10,10 +10,11 @@ class Category extends Component {
 		const id = Number(this.props.params.id);
 		const category = categories.find(category => category.id === id);
 		const services = this.props.services_state.services.filter(service => service.categoryId === id);
+		const userRoles = this.props.user_roles;
 
 		const loaderImage = <img src={loader} style={{height: '28px'}} alt="loading"/>;
 
-		const topBnts = category ?
+		const topBnts = (category && userRoles.includes('ADMIN')) ?
             <div className="pull-right">
                 <Link to="/categories/new">
                     <span className="btn btn-sm btn-success">
@@ -48,7 +49,9 @@ class Category extends Component {
                         <tr>
                             <th>Name</th>
                             <th>Description</th>
-                            <th>Operations</th>
+							{ userRoles.includes('ADMIN') ? (
+								<th>Operations</th>
+							) : null }
                         </tr>
                         </thead>
                         <tbody>
@@ -56,19 +59,23 @@ class Category extends Component {
                         <tr key={service.id}>
                             <td>
                                 <Link to={`/services/${service.id}`}>{service.name}</Link>
-                            </td>
-                            <td>{service.description}</td>
-                            <td>
-                                <Link to={`/services/${service.id}/edit`}>
-                                    <span className="btn btn-xs btn-primary">
-                                        <span className="glyphicon glyphicon-pencil"/>
-                                    </span>
-                                </Link>
-                                <button className="btn btn-xs btn-danger" type="button" onClick={() => console.log('DELETE')}>
-                                    <span className="glyphicon glyphicon-trash" />
-                                </button>
-                            </td>
-                        </tr>
+							</td>
+							<td>{service.description}</td>
+							{ userRoles.includes('ADMIN') ? (
+									<td>
+										<Link to={`/services/${service.id}/edit`}>
+                                    		<span className="btn btn-xs btn-primary">
+                                        		<span className="glyphicon glyphicon-pencil"/>
+                                    		</span>
+										</Link>
+										<button className="btn btn-xs btn-danger" type="button" onClick={() => console.log('DELETE')}>
+											<span className="glyphicon glyphicon-trash" />
+										</button>
+									</td>
+								) :
+								null
+							}
+						</tr>
                         )}
                         </tbody>
                     </table>
@@ -90,10 +97,11 @@ Category.defaultProps = {
 };
 
 
-const mapStateToProps = ({categories_state, services_state}) => {
+const mapStateToProps = ({categories_state, services_state, users_state}) => {
 	return {
 		categories_state,
-		services_state
+		services_state,
+		user_roles: (users_state.me) ? users_state.me.roles : []
 	}
 };
 

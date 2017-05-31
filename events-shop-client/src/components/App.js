@@ -19,6 +19,10 @@ class App extends Component {
 		userManager.signinRedirect({ data: { redirectUrl: window.location.pathname }});
 	}
 
+	signout() {
+		userManager.signoutRedirect({ data: { redirectUrl: window.location.pathname }});
+	}
+
 	activateEvent(eventId) {
 		this.props.dispatch(activateEvent(eventId));
 	}
@@ -27,7 +31,15 @@ class App extends Component {
 
 		let login;
 		if (this.props.user) {
-			login = (<p className="navbar-text navbar-right">{this.props.user.profile.name}</p>);
+			login = (
+			<ul className="nav navbar-nav navbar-right">
+				<NavDropdown title={this.props.user.name} id="userMenu">
+					{Object.values(this.props.user.roles).map(role =>
+						<MenuItem key={role} header>{role}</MenuItem>
+					)}
+				</NavDropdown>
+			</ul>
+			);
 		} else {
 			login = (
 				<button className="btn btn-default navbar-btn navbar-right" onClick={this.signin.bind(this)}>
@@ -94,9 +106,9 @@ class App extends Component {
 	}
 }
 
-const mapStateToProps = ({auth_state, events_state}) => {
+const mapStateToProps = ({users_state, events_state}) => {
 	return {
-		user: auth_state.user,
+		user: users_state.me,
 		events_state
 	}
 };

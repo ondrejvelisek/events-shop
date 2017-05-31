@@ -19,6 +19,7 @@ import CategoryNew from './components/CategoryNew';
 import categoriesReducer from './reducers/categories';
 import servicesReducer from './reducers/services';
 import eventsReducer from './reducers/events';
+import usersReducer from './reducers/users';
 import 'bootstrap/dist/css/bootstrap.css';
 import './styles/index.css';
 import EventsShop from "./api/EventsShop";
@@ -26,12 +27,14 @@ import {userManager} from "./utils/userManager";
 import createWsMiddleware from "./utils/websockets";
 import Service from "./components/Service";
 import Events from "./components/Events";
+import {fetchUserMe} from './actions/users';
 
 
 const reducer = combineReducers({
 	categories_state: categoriesReducer,
 	services_state: servicesReducer,
 	events_state: eventsReducer,
+	users_state: usersReducer,
 	routing: routerReducer,
 	auth_state: authReducer,
 	form: formReducer
@@ -60,6 +63,13 @@ const store = createStore(
 
 const history = syncHistoryWithStore(browserHistory, store);
 
+userManager.events.addUserLoaded(() => {
+	store.dispatch(fetchUserMe());
+});
+
+userManager.getUser().then(() => {
+	store.dispatch(fetchUserMe());
+});
 
 ReactDOM.render(
 	<Provider store={store}>

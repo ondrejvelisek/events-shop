@@ -30,7 +30,8 @@ class Api {
 		if (response.ok) {
 			return response;
 		} else {
-			if (response.headers.get('Content-Type').includes('application/json')) {
+			const contentType = response.headers.get('Content-Type');
+			if (contentType && contentType.includes('application/json')) {
 				return response.json().then(json => {
 					throw new Error(json.message);
 				});
