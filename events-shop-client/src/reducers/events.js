@@ -1,7 +1,8 @@
 import {
 	FETCH_EVENTS_ERROR, FETCH_EVENTS_START, UPDATE_EVENTS,
 	ACTIVATE_EVENT,
-	CREATE_EVENT_START, CREATE_EVENT_ERROR, CREATE_EVENT_SUCCESS
+	CREATE_EVENT_START, CREATE_EVENT_ERROR, CREATE_EVENT_SUCCESS,
+	DELETE_EVENT_START, DELETE_EVENT_ERROR, DELETE_EVENT_SUCCESS
 } from '../actions/events'
 
 const eventsReducer = (state = {events: [], updating: false}, action) => {
@@ -32,7 +33,22 @@ const eventsReducer = (state = {events: [], updating: false}, action) => {
 			return {...state, updating: false};
 
 		case CREATE_EVENT_SUCCESS:
-			return {...state, updating: false, events: [...state.events, action.event]};
+			return {...state, updating: false, events: [...state.events, action.event] };
+
+
+		case DELETE_EVENT_START:
+			return {...state, updating: true};
+
+		case DELETE_EVENT_ERROR:
+			// TODO deal with it
+			console.error(action.error);
+			return {...state, updating: false};
+
+		case DELETE_EVENT_SUCCESS:
+			return {...state, updating: false,
+				events: [
+					...state.events.filter(event => event.id !== action.eventId)
+				]};
 
 		default:
 			return state;

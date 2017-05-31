@@ -27,32 +27,44 @@ class Service extends Component {
 		const viewingService = viewing[id] ? viewing[id] : 0;
 		const category = service ? this.props.categories_state.categories.find(category => category.id === service.categoryId) : null;
 
-		const loaderImage = <img src={loader} style={{height: '28px'}} alt="loading"/>;
-
-		return (
+        return (
             <div className="service">
-				{category ? (
-					<p>
-						<Link to={'/categories/'+category.id}>{category.name}</Link>
-					</p>
-				) : null}
-				<h2>
-					<span>{service ? service.name : null}</span>
-					<span> {updating ? loaderImage : null} </span>
-					<span>{(!(service) && !updating) ? 'Unknown service selected' : null}</span>
-				</h2>
-				{service ? (
-					<div>
-						<p>
-							{service.description}
-						</p>
-						<p>
-							This category is being viewed by {viewingService} people
-						</p>
-					</div>
-				) : null}
-			</div>
-		);
+                {category ? (
+                    <p>
+                        <Link to={'/categories/'+category.id}>{category.name}</Link>
+                    </p>
+                ) : null}
+                <h2>
+                    <span>{service ? service.name : null}</span>
+                    <span> {updating ? loaderImage : null} </span>
+                    <span>{(!(service) && !updating) ? 'Unknown service selected' : null}</span>
+                </h2>
+                {service ? (
+                    <div>
+                        <div className="pull-right">
+                            <Link to="/services/new">
+                                <span className="btn btn-success">
+                                    <span className="glyphicon glyphicon-plus"/>
+                                </span>
+                            </Link>
+                            <Link to={`/services/${service.id}/edit`}>
+                                <span className="btn btn-primary">
+                                    <span className="glyphicon glyphicon-pencil"/>
+                                </span>
+                            </Link>
+                        </div>
+                        <p>
+                            {service.description}
+                        </p>
+                        <p>
+                            This category is being viewed by {viewingService} people
+                        </p>
+                    </div>
+                ) : null}
+            </div>
+        );
+
+		const loaderImage = <img src={loader} style={{height: '28px'}} alt="loading"/>;
 	}
 }
 

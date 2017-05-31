@@ -9,6 +9,10 @@ class UsersApi extends Api {
 		return this.call("/users/me");
 	}
 
+	getAllUsers() {
+		return this.call("/users");
+	}
+
 }
 
 export default UsersApi;

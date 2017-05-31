@@ -19,7 +19,19 @@ public class Event extends AbstractEntity {
     @OneToMany(fetch = FetchType.EAGER)
     private List<EventService> eventServices = new ArrayList<>();
 
+//	@DecimalMin("0.00")
+//    @Column(nullable = false)
+//	private BigDecimal price = BigDecimal.ZERO;
+
     @NotNull
+    @Column(nullable = false)
+    private String city;
+
+    @NotNull
+    @Column(nullable = false)
+    private String address;
+
+	@NotNull
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
     private Date date;
@@ -78,6 +90,31 @@ public class Event extends AbstractEntity {
 
     public void setEventServices(List<EventService> eventServices) {
         this.eventServices = eventServices;
+    }
+
+//    public BigDecimal getPrice() {
+//        return price;
+//    }
+//
+//    public void setPrice(BigDecimal price) {
+//        this.price = price;
+//    }
+
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Date getDate() {
