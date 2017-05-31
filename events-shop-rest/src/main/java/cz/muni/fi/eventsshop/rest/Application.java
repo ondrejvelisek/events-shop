@@ -48,6 +48,13 @@ public class Application extends javax.ws.rs.core.Application {
 			ondrej.setEmail("ondrejvelisek@gmail.com");
 			ondrej = userFacade.createUser(ondrej);
 
+			User peter = new User();
+			peter.setOAuthId("115200590838015842781");
+			peter.setRoles(new HashSet<>(Arrays.asList(User.Role.USER, User.Role.ADMIN)));
+			peter.setName("Peter Javorka");
+			peter.setEmail("javorka93@gmail.com");
+			userFacade.createUser(peter);
+
 			Category food = new Category();
 			food.setName("Food and drinks");
 			food.setDescription("Every host know that happiness goes through stomach of his guests");

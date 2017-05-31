@@ -1,5 +1,5 @@
 import {
-	FETCH_CATEGORIES_ERROR, FETCH_CATEGORIES_START, UPDATE_CATEGORIES,
+	FETCH_CATEGORIES_ERROR, FETCH_CATEGORIES_START, UPDATE_CATEGORIES
 } from '../actions/categories'
 
 const categoriesReducer = (state = {categories: [], updating: false}, action) => {

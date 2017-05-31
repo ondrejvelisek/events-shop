@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from "react-redux";
 import loader from "../images/loader.gif";
 import {Link} from "react-router";
+import Form from './form/EventForm';
 
 class Category extends Component {
 
@@ -13,8 +14,23 @@ class Category extends Component {
 
 		const loaderImage = <img src={loader} style={{height: '28px'}} alt="loading"/>;
 
-		return (
+		const topBnts = category ?
+            <div className="pull-right">
+                <Link to="/categories/new">
+                    <span className="btn btn-success">
+                        <span className="glyphicon glyphicon-plus"/>
+                    </span>
+                </Link>
+                <Link to={`/categories/${category.id}/edit`}>
+                    <span className="btn btn-primary">
+                        <span className="glyphicon glyphicon-pencil"/>
+                    </span>
+                </Link>
+            </div> : null;
+
+        return (
             <div className="category">
+                {topBnts}
 				<h2>
 					<span>{category ? category.name : null}</span>
 					<span> {updating ? loaderImage : null} </span>
@@ -23,6 +39,7 @@ class Category extends Component {
 				<p>
 					{category ? category.description : null}
 				</p>
+
 				<div className="row">
 					{Object.values(services).map(service =>
 						<div key={service.id} className="col-sm-6 col-md-4">
@@ -35,6 +52,7 @@ class Category extends Component {
 						</div>
 					)}
 				</div>
+				<Form services={[{id: 1, name: 'cool', desc: 'naprd'}, {id: 2, name: 'cool2', desc: 'naprd2'}]}/>
 			</div>
 		);
 	}
