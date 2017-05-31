@@ -28,7 +28,7 @@ import java.util.Date;
 @Singleton
 public class ScheduleExample {
 
-    @Schedule(second = "05", minute = "04", hour = "22", persistent = false)
+    @Schedule(second = "05", minute = "38", hour = "22", persistent = false)
     public void doWork() {
         Date currentTime = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z");

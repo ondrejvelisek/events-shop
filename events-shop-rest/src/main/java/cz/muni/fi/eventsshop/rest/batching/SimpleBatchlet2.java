@@ -22,17 +22,14 @@ import java.util.Properties;
 /**
  * Created by pato on 31.5.2017.
  */
-@Named
-@Dependent
+@Named("simple")
+@ApplicationScoped
 public class SimpleBatchlet2 implements Batchlet {
 
-
     @Inject
-    @BatchProperty
     EventFacade facade;
 
     @Inject
-    @BatchProperty
     private WeatherFacade weatherFacade;
 
     @Override
@@ -70,13 +67,13 @@ public class SimpleBatchlet2 implements Batchlet {
                 message.setText("Hi, "+ events.get(i).getClient().getName() +"\n" +
                         "we are sending you informations about your upcoming event.\n" +
                         "Date: " + events.get(i).getDate() + "\n" +
-                        "Weather: \n" );
+                        "Weather: \n" +
                         "  Temperature: " + w.getTemperature() + " Celsius\n" +
                         "  Clouds: " + w.getCloudDescription() + " \n" +
                         "  Wind speed: " + w.getWindSpeed() + " m/s\n" +
                         "  Pressure: " + w.getPressure() + " hPa\n\n" +
-                        " Your events-shop team. ");
-                message.setContent("This Is my First Mail Through Java");
+                        " Have a nice day, your events-shop team. ");
+                //message.setContent("This Is my First Mail Through Java");
                 message.setNotifyOptions(SMTPMessage.NOTIFY_SUCCESS);
                 int returnOption = message.getReturnOption();
                 System.out.println(returnOption);

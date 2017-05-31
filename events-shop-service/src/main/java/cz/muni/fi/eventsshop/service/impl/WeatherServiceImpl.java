@@ -23,7 +23,7 @@ public class WeatherServiceImpl implements WeatherService {
 
     @Override
     public Weather getWeatherForecast(String cityName) throws Exception {
-        String url = "http://api.openweathermap.org/data/2.5/forecast?q=" + cityName +"," +  CZ_CODE + "&APPID=" + API_KEY;
+        String url = "http://api.openweathermap.org/data/2.5/forecast?q=" + cityName +"," +  CZ_CODE + "&units=metric&APPID=" + API_KEY;
 
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -59,7 +59,7 @@ public class WeatherServiceImpl implements WeatherService {
                 weather.setCloudDescription(arr.getJSONObject(i).getJSONArray("weather").getJSONObject(0).getString("description"));
                 weather.setTemperature((float)arr.getJSONObject(i).getJSONObject("main").getDouble("temp"));
                 weather.setPressure((float)arr.getJSONObject(i).getJSONObject("main").getDouble("pressure"));
-                weather.setPressure((float)arr.getJSONObject(i).getJSONObject("wind").getDouble("speed"));
+                weather.setWindSpeed((float)arr.getJSONObject(i).getJSONObject("wind").getDouble("speed"));
                }
         }
         //return JSON string from http://www.openweathermap.com/
