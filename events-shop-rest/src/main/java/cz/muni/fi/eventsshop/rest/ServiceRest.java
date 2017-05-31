@@ -1,6 +1,7 @@
 package cz.muni.fi.eventsshop.rest;
 
 import cz.muni.fi.eventsshop.exceptions.InternalException;
+import cz.muni.fi.eventsshop.facade.DTO.ServiceDTO;
 import cz.muni.fi.eventsshop.model.Service;
 
 import javax.ws.rs.*;
@@ -15,21 +16,21 @@ public interface ServiceRest {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    Service createService(Service service) throws InternalException;
+    ServiceDTO createService(ServiceDTO service) throws InternalException;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    List<Service> getAllServices() throws InternalException;
+    List<ServiceDTO> getAllServices() throws InternalException;
 
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    Service getServiceById(@PathParam("id") long id) throws InternalException;
+    ServiceDTO getServiceById(@PathParam("id") long id) throws InternalException;
 
     @PUT
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    void updateService(@PathParam("id") long id, Service service) throws InternalException;
+    void updateService(@PathParam("id") long id, ServiceDTO service) throws InternalException;
 
     @DELETE
     @Path("/{id}")

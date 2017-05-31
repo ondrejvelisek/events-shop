@@ -1,6 +1,7 @@
 package cz.muni.fi.eventsshop.rest;
 
 import cz.muni.fi.eventsshop.exceptions.InternalException;
+import cz.muni.fi.eventsshop.facade.DTO.ServiceDTO;
 import cz.muni.fi.eventsshop.facade.ServiceFacade;
 import cz.muni.fi.eventsshop.model.Service;
 
@@ -20,22 +21,22 @@ public class ServiceRestImpl implements ServiceRest {
     private ServiceFacade facade;
 
     @Override
-    public Service createService(Service service) throws InternalException {
+    public ServiceDTO createService(ServiceDTO service) throws InternalException {
         return facade.createService(service);
     }
 
     @Override
-    public List<Service> getAllServices() throws InternalException {
+    public List<ServiceDTO> getAllServices() throws InternalException {
         return facade.getAllServices();
     }
 
     @Override
-    public Service getServiceById(long id) throws InternalException {
+    public ServiceDTO getServiceById(long id) throws InternalException {
         return facade.getServiceById(id);
     }
 
     @Override
-    public void updateService(long id, Service service) throws InternalException {
+    public void updateService(long id, ServiceDTO service) throws InternalException {
         facade.updateService(id, service);
     }
 
