@@ -16,7 +16,8 @@ class Api {
 		if (user && user.id_token) {
 			headers['Authorization'] = 'Bearer '+user.id_token;
 		}
-		return fetch(this.baseUrl + path, Object.assign({ headers }, args))
+		args.headers = Object.assign(headers, args.headers);
+		return fetch(this.baseUrl + path, args)
 			.then(this.checkError)
 			.then(response => {
 				if (response.status !== 204 && response.headers.get('Content-Type').includes('application/json')) {
