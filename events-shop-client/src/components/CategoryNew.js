@@ -9,7 +9,7 @@ class CategoryNew extends Component {
         return (
             <div>
                 <h2>New Category</h2>
-                <Form pristine={anyTouched} isValid={!syncErrors} handleSubmit={this.props.save}/>
+                <Form onSubmit={this.props.save} pristine={anyTouched} isValid={!syncErrors}/>
             </div>
         )
     }

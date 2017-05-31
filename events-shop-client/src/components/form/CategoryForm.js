@@ -5,7 +5,7 @@ import { renderField, renderTextarea } from './utils';
 const required = value => (value ? undefined : 'Required');
 
 const CategoryForm = props => {
-    const {handleSubmit, pristine, reset, submitting, isValid} = props;
+    const {handleSubmit, pristine, reset, isValid} = props;
     return (
         <form onSubmit={handleSubmit}>
             <Field name="name"
@@ -18,8 +18,8 @@ const CategoryForm = props => {
                    label="Description"
                    validate={required}/>
             <div>
-                <button type="submit" disabled={!isValid}>Submit</button>
-                <button type="button" disabled={pristine} onClick={reset}>
+                <button className="btn btn-primary" type="submit" disabled={!isValid}>Submit</button>
+                <button className="btn btn-default" type="button" disabled={pristine} onClick={reset}>
                     Clear Values
                 </button>
             </div>

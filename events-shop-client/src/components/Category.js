@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {connect} from "react-redux";
 import loader from "../images/loader.gif";
 import {Link} from "react-router";
 import Form from './form/EventForm';
 
 class Category extends Component {
-
 	render() {
 		const { updating, categories } = this.props.categories_state;
 		const id = Number(this.props.params.id);
@@ -17,15 +16,18 @@ class Category extends Component {
 		const topBnts = category ?
             <div className="pull-right">
                 <Link to="/categories/new">
-                    <span className="btn btn-success">
+                    <span className="btn btn-sm btn-success">
                         <span className="glyphicon glyphicon-plus"/>
                     </span>
                 </Link>
                 <Link to={`/categories/${category.id}/edit`}>
-                    <span className="btn btn-primary">
+                    <span className="btn btn-sm btn-primary">
                         <span className="glyphicon glyphicon-pencil"/>
                     </span>
                 </Link>
+                <span className="btn btn-sm btn-danger">
+                    <span className="glyphicon glyphicon-trash"/>
+                </span>
             </div> : null;
 
         return (
@@ -41,22 +43,52 @@ class Category extends Component {
 				</p>
 
 				<div className="row">
-					{Object.values(services).map(service =>
-						<div key={service.id} className="col-sm-6 col-md-4">
-							<Link to={'/services/'+service.id} className="thumbnail">
-								<div className="caption">
-									<h3>{service.name}</h3>
-									<p>{service.description}</p>
-								</div>
-							</Link>
-						</div>
-					)}
+                    <table className="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Operations</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {services.map(service =>
+                        <tr key={service.id}>
+                            <td>
+                                <Link to={`/services/${service.id}`}>{service.name}</Link>
+                            </td>
+                            <td>{service.description}</td>
+                            <td>
+                                <Link to={`/services/${service.id}/edit`}>
+                                    <span className="btn btn-xs btn-primary">
+                                        <span className="glyphicon glyphicon-pencil"/>
+                                    </span>
+                                </Link>
+                                <button className="btn btn-xs btn-danger" type="button" onClick={() => console.log('DELETE')}>
+                                    <span className="glyphicon glyphicon-trash" />
+                                </button>
+                            </td>
+                        </tr>
+                        )}
+                        </tbody>
+                    </table>
 				</div>
-				<Form services={[{id: 1, name: 'cool', desc: 'naprd'}, {id: 2, name: 'cool2', desc: 'naprd2'}]}/>
+				<Form onSubmit={() => console.log('coool')} services={[{id: 1, name: 'cool', desc: 'naprd'}, {id: 2, name: 'cool2', desc: 'naprd2'}]}/>
 			</div>
 		);
 	}
 }
+
+Category.propTypes = {
+    services: PropTypes.array,
+    category: PropTypes.any
+};
+
+Category.defaultProps = {
+    services: [],
+    category: {}
+};
+
 
 const mapStateToProps = ({categories_state, services_state}) => {
 	return {

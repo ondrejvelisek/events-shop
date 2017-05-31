@@ -51,7 +51,7 @@ class App extends Component {
 							</div>
 							<ul className="nav navbar-nav">
 								<li><Link to="/">Home</Link></li>
-								<li><Link to="/categories">Categories</Link></li>
+								<li><Link to="/categories">Services</Link></li>
 							</ul>
 							<ul className="nav navbar-nav navbar-right">
 								<NavDropdown title={activeEvent ? activeEvent.name : 'cart'} id="cartMenu">
