@@ -6,16 +6,20 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.Objects;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Service extends AbstractEntity {
 
     @NotNull
     @Column(nullable = false)
+    @Size(min = 1, max = 32)
     private String name;
 
     @NotNull
     @Column(nullable = false)
+    @Size(min = 1, max = 300)
     private String description;
 
     @NotNull
@@ -49,10 +53,12 @@ public class Service extends AbstractEntity {
 
     @Override
     public int hashCode() {
-        int result = getName().hashCode();
-        result = 31 * result + getDescription().hashCode();
-        result = 31 * result + getPrice().hashCode();
-        return result;
+        int hash = 21;
+        hash = 97 * hash + Objects.hashCode(this.name);
+        hash = 97 * hash + Objects.hashCode(this.description);
+        hash = 97 * hash + Objects.hashCode(this.price);
+        hash = 97 * hash + Objects.hashCode(this.category);
+        return hash;
     }
 
     public String getName() {

@@ -10,7 +10,6 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.transaction.api.annotation.TransactionMode;
 import org.jboss.arquillian.transaction.api.annotation.Transactional;
-import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -47,12 +46,12 @@ public class CategoryRepositoryTest {
         Assert.assertEquals(category, categoryRepository.find(category.getId()));
     }
 
-    @Test//(expected = javax.persistence.PersistenceException.class)
-    @Transactional(TransactionMode.ROLLBACK)
-    public void testDoubleCreate() {
-        categoryRepository.create(category);
-        categoryRepository.create(category);
-    }
+//    @Test//(expected = javax.persistence.PersistenceException.class)
+//    @Transactional(TransactionMode.ROLLBACK)
+//    public void testDoubleCreate() {
+//        categoryRepository.create(category);
+//        categoryRepository.create(category);
+//    }
 
     @Test(expected = IllegalArgumentException.class)
     @Transactional(TransactionMode.ROLLBACK)

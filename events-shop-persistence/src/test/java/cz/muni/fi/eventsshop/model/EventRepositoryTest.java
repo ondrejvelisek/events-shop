@@ -2,7 +2,6 @@ package cz.muni.fi.eventsshop.model;
 
 import cz.muni.fi.eventsshop.EventsShopTestDeployment;
 import cz.muni.fi.eventsshop.repository.EventRepository;
-import cz.muni.fi.eventsshop.repository.UserRepository;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +15,6 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.transaction.api.annotation.TransactionMode;
 import org.jboss.arquillian.transaction.api.annotation.Transactional;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;

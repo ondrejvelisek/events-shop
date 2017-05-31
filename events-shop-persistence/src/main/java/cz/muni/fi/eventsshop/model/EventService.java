@@ -7,6 +7,7 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.Objects;
 
 @Entity
 public class EventService extends AbstractEntity {
@@ -44,11 +45,13 @@ public class EventService extends AbstractEntity {
 
     @Override
     public int hashCode() {
-        int result = getCount();
-        result = 31 * result + getPrice().hashCode();
-        return result;
+        int hash = 27;
+        hash = 67 * hash + Objects.hashCode(this.service);
+        hash = 67 * hash + this.count;
+        hash = 67 * hash + Objects.hashCode(this.price);
+        return hash;
     }
-
+    
     public Service getService() {
         return service;
     }
