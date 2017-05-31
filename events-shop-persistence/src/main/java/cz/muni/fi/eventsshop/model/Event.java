@@ -1,31 +1,31 @@
 package cz.muni.fi.eventsshop.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Event extends AbstractEntity {
 
     @NotNull
+    @Size(min = 1, max = 32)
     @Column(nullable = false)
     private String name;
 
     @OneToMany(fetch = FetchType.EAGER)
-	private List<EventService> eventServices = new ArrayList<>();
+    private List<EventService> eventServices = new ArrayList<>();
 
 //	@DecimalMin("0.00")
 //    @Column(nullable = false)
 //	private BigDecimal price = BigDecimal.ZERO;
-
     @NotNull
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
-	private Date date;
+    private Date date;
 
     @NotNull
     @ManyToOne(optional = false)
@@ -46,20 +46,25 @@ public class Event extends AbstractEntity {
 
         Event event = (Event) o;
 
-
-        if (!getName().equals(event.getName())) return false;
+        if (!getName().equals(event.getName())) {
+            return false;
+        }
         //if (!getPrice().equals(event.getPrice())) return false;
-        if (!getDate().equals(event.getDate())) return false;
+        if (!getDate().equals(event.getDate())) {
+            return false;
+        }
         return getState() == event.getState();
     }
 
     @Override
     public int hashCode() {
-        int result = getName().hashCode();
-        //result = 31 * result + getPrice().hashCode();
-        result = 31 * result + getDate().hashCode();
-        result = 31 * result + getState().hashCode();
-        return result;
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.name);
+        hash = 97 * hash + Objects.hashCode(this.eventServices);
+        hash = 97 * hash + Objects.hashCode(this.date);
+        hash = 97 * hash + Objects.hashCode(this.client);
+        hash = 97 * hash + Objects.hashCode(this.state);
+        return hash;
     }
 
     public String getName() {
@@ -85,7 +90,6 @@ public class Event extends AbstractEntity {
 //    public void setPrice(BigDecimal price) {
 //        this.price = price;
 //    }
-
     public Date getDate() {
         return date;
     }

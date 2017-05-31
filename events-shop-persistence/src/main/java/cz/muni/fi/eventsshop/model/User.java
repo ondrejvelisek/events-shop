@@ -1,5 +1,6 @@
 package cz.muni.fi.eventsshop.model;
 
+import java.util.Objects;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
@@ -13,9 +14,9 @@ public class User extends AbstractEntity {
     @Column(nullable = false)
     private String name;
 
-	@NotNull
-	@Column(nullable = false, unique = true)
-	private String oAuthId;
+    @NotNull
+    @Column(nullable = false, unique = true)
+    private String oAuthId;
 
     @NotNull
     @Email
@@ -37,18 +38,24 @@ public class User extends AbstractEntity {
 
         User user = (User) o;
 
-        if (!getName().equals(user.getName())) return false;
-        if (!getOAuthId().equals(user.getOAuthId())) return false;
+        if (!getName().equals(user.getName())) {
+            return false;
+        }
+        if (!getOAuthId().equals(user.getOAuthId())) {
+            return false;
+        }
         return getEmail().equals(user.getEmail());
     }
 
     @Override
     public int hashCode() {
-        int result = getName().hashCode();
-        result = 31 * result + getOAuthId().hashCode();
-        result = 31 * result + getEmail().hashCode();
-        return result;
-    }
+        int hash = 17;
+        hash = 83 * hash + Objects.hashCode(this.name);
+        hash = 83 * hash + Objects.hashCode(this.oAuthId);
+        hash = 83 * hash + Objects.hashCode(this.email);
+        hash = 83 * hash + Objects.hashCode(this.roles);
+        return hash;
+    }    
 
     public enum Role {
         ADMIN,
