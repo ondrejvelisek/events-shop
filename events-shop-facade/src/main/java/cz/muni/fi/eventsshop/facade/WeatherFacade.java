@@ -1,9 +1,11 @@
 package cz.muni.fi.eventsshop.facade;
 
+import cz.muni.fi.eventsshop.service.impl.Weather;
+
 /**
  * Created by patrik.cyprian on 26.5.2017.
  */
 public interface WeatherFacade {
 
-    String getWeatherForecast(String cityName) throws Exception;
+    Weather getWeatherForecast(String cityName) throws Exception;
 }

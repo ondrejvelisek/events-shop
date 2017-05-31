@@ -1,5 +1,7 @@
 package cz.muni.fi.eventsshop.rest;
 
+import cz.muni.fi.eventsshop.service.impl.Weather;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -11,5 +13,5 @@ public interface WeatherRest {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    String getWeatherForecast(String cityName) throws Exception;
+    Weather getWeatherForecast(String cityName) throws Exception;
 }

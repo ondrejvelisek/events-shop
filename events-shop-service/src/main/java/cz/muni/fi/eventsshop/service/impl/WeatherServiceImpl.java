@@ -1,6 +1,8 @@
 package cz.muni.fi.eventsshop.service.impl;
 
 import cz.muni.fi.eventsshop.service.WeatherService;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.io.BufferedReader;
@@ -20,8 +22,8 @@ public class WeatherServiceImpl implements WeatherService {
 
 
     @Override
-    public String getWeatherForecast(String cityName) throws Exception {
-        String url = "http://api.openweathermap.org/data/2.5/forecast?q=" + cityName +"," +  CZ_CODE + "&APPID=" + API_KEY;
+    public Weather getWeatherForecast(String cityName) throws Exception {
+        String url = "http://api.openweathermap.org/data/2.5/forecast?q=" + cityName +"," +  CZ_CODE + "&units=metric&APPID=" + API_KEY;
 
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -47,7 +49,20 @@ public class WeatherServiceImpl implements WeatherService {
         }
         in.close();
 
+        Weather weather = new Weather();
+        JSONObject json = new JSONObject(response.toString());
+
+        JSONArray arr = json.getJSONArray("list");
+        for (int i = 0; i < arr.length(); i++)
+        {
+            if (i == 23) {
+                weather.setCloudDescription(arr.getJSONObject(i).getJSONArray("weather").getJSONObject(0).getString("description"));
+                weather.setTemperature((float)arr.getJSONObject(i).getJSONObject("main").getDouble("temp"));
+                weather.setPressure((float)arr.getJSONObject(i).getJSONObject("main").getDouble("pressure"));
+                weather.setWindSpeed((float)arr.getJSONObject(i).getJSONObject("wind").getDouble("speed"));
+               }
+        }
         //return JSON string from http://www.openweathermap.com/
-        return response.toString();
+        return weather;
     }
 }

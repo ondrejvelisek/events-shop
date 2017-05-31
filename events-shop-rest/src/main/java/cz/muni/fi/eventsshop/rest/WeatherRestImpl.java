@@ -1,6 +1,7 @@
 package cz.muni.fi.eventsshop.rest;
 
 import cz.muni.fi.eventsshop.facade.WeatherFacade;
+import cz.muni.fi.eventsshop.service.impl.Weather;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -17,7 +18,7 @@ public class WeatherRestImpl implements WeatherRest {
     private WeatherFacade weatherFacade;
 
     @Override
-    public String getWeatherForecast(String cityName) throws Exception {
+    public Weather getWeatherForecast(String cityName) throws Exception {
         return weatherFacade.getWeatherForecast(cityName);
     }
 }

@@ -12,6 +12,11 @@
 	<artifactId>events-shop-service</artifactId>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20160810</version>
+		</dependency>
 
 		<dependency>
 			<groupId>cz.muni.fi</groupId>
