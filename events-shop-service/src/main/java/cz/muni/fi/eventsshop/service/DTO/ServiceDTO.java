@@ -1,13 +1,19 @@
-package cz.muni.fi.eventsshop.facade.DTO;
+package cz.muni.fi.eventsshop.service.DTO;
+
+import cz.muni.fi.eventsshop.model.Category;
+
+import java.math.BigDecimal;
 
 /**
  * Created by pato on 1.6.2017.
  */
-public class CategoryDTO {
+public class ServiceDTO {
 
     private long id;
     private String name;
     private String description;
+    private BigDecimal price;
+    private long categoryId;
 
     public long getId() {
         return id;
@@ -33,11 +39,29 @@ public class CategoryDTO {
         this.description = description;
     }
 
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(long categoryId) {
+        this.categoryId = categoryId;
+    }
+
     @Override
     public String toString() {
-        return "CategoryDTO{" +
+        return "ServiceDTO{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", price=" + price +
+                ", categoryId=" + categoryId +
                 '}';
     }
 }

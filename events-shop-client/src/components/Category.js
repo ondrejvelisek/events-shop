@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { deleteCategory } from '../actions/categories';
 import {connect} from "react-redux";
 import loader from "../images/loader.gif";
 import {Link} from "react-router";
@@ -26,9 +27,11 @@ class Category extends Component {
                         <span className="glyphicon glyphicon-pencil"/>
                     </span>
                 </Link>
-                <span className="btn btn-sm btn-danger">
-                    <span className="glyphicon glyphicon-trash"/>
-                </span>
+                <Link to={`/categories`} onClick={() => this.props.deleteCategory(id)}>
+                    <span className="btn btn-sm btn-danger">
+                        <span className="glyphicon glyphicon-trash"/>
+                    </span>
+                </Link>
             </div> : null;
 
         return (
@@ -105,4 +108,6 @@ const mapStateToProps = ({categories_state, services_state, users_state}) => {
 	}
 };
 
-export default connect(mapStateToProps)(Category)
+export default connect(mapStateToProps, {
+    deleteCategory
+})(Category)

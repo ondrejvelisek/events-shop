@@ -1,9 +1,8 @@
 package cz.muni.fi.eventsshop.rest;
 
 import cz.muni.fi.eventsshop.exceptions.InternalException;
-import cz.muni.fi.eventsshop.facade.DTO.ServiceDTO;
+import cz.muni.fi.eventsshop.service.DTO.ServiceDTO;
 import cz.muni.fi.eventsshop.facade.ServiceFacade;
-import cz.muni.fi.eventsshop.model.Service;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;

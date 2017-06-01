@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux";
 import loader from "../images/loader.gif";
-import { joinServicePage, leaveServicePage } from "../actions/services";
+import { joinServicePage, leaveServicePage, deleteService } from "../actions/services";
 import {Link} from "react-router";
 
 class Service extends Component {
@@ -52,7 +52,13 @@ class Service extends Component {
                                     <span className="glyphicon glyphicon-pencil"/>
                                 </span>
                             </Link>
-                        </div>
+							<Link to={`/categories`} onClick={() => this.props.deleteService(id)}>
+								<span className="btn btn-sm btn-danger">
+									<span className="glyphicon glyphicon-trash"/>
+								</span>
+							</Link>
+
+						</div>
                         <p>
                             {service.description}
                         </p>
@@ -75,4 +81,6 @@ const mapStateToProps = ({services_state, categories_state}) => {
 	}
 };
 
-export default connect(mapStateToProps)(Service)
+export default connect(mapStateToProps, {
+    deleteService
+})(Service)

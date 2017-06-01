@@ -2,7 +2,7 @@ package cz.muni.fi.eventsshop.facade;
 
 import cz.muni.fi.eventsshop.exceptions.BeanNotExistsException;
 import cz.muni.fi.eventsshop.exceptions.InternalException;
-import cz.muni.fi.eventsshop.facade.DTO.EventDTO;
+import cz.muni.fi.eventsshop.service.DTO.EventDTO;
 import cz.muni.fi.eventsshop.model.Event;
 import cz.muni.fi.eventsshop.service.BeanMappingService;
 import cz.muni.fi.eventsshop.service.EventService;
@@ -11,6 +11,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by patrik.cyprian on 14.5.2017.
@@ -28,14 +29,17 @@ public class EventFacadeImpl implements EventFacade {
 
     @Override
     public EventDTO createEvent(EventDTO data) throws InternalException {
-        Event event = beanMappingService.mapTo(data, Event.class);
+        Event event = beanMappingService.toEvent(data);
         service.createEvent(event);
-        return beanMappingService.mapTo(data, EventDTO.class);
+        return beanMappingService.fromEvent(event);
     }
 
     @Override
     public List<EventDTO> getAllEvents() throws InternalException {
-        return beanMappingService.mapTo(service.getAllEvents(), EventDTO.class);
+        return service.getAllEvents()
+                .stream()
+                .map(e -> beanMappingService.fromEvent(e))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -45,7 +49,7 @@ public class EventFacadeImpl implements EventFacade {
 
     @Override
     public EventDTO getEventById(long id) throws InternalException {
-        return beanMappingService.mapTo(service.getEventById(id), EventDTO.class);
+        return beanMappingService.fromEvent(service.getEventById(id));
     }
 
     @Override
@@ -53,7 +57,7 @@ public class EventFacadeImpl implements EventFacade {
         if (service.getEventById(id) == null){
             throw new BeanNotExistsException("Event with id "+ id + " does not exist.");
         }
-        Event event = beanMappingService.mapTo(data, Event.class);
+        Event event = beanMappingService.toEvent(data);
         service.updateEvent(event);
     }
 

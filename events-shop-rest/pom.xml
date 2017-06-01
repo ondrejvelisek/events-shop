@@ -125,7 +125,7 @@
 		<dependency>
 			<groupId>org.jboss.spec.javax.batch</groupId>
 			<artifactId>jboss-batch-api_1.0_spec</artifactId>
-			<version>1.0.0.FINAL</version>
+			<version>1.0.0.Final</version>
 			<scope>provided</scope>
 		</dependency>
 

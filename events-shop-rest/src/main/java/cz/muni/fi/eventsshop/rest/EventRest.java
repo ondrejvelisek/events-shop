@@ -1,8 +1,7 @@
 package cz.muni.fi.eventsshop.rest;
 
 import cz.muni.fi.eventsshop.exceptions.InternalException;
-import cz.muni.fi.eventsshop.facade.DTO.EventDTO;
-import cz.muni.fi.eventsshop.model.Event;
+import cz.muni.fi.eventsshop.service.DTO.EventDTO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

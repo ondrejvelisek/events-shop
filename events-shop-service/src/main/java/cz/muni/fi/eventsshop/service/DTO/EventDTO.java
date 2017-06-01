@@ -1,7 +1,6 @@
-package cz.muni.fi.eventsshop.facade.DTO;
+package cz.muni.fi.eventsshop.service.DTO;
 
 import cz.muni.fi.eventsshop.model.Event;
-import cz.muni.fi.eventsshop.model.EventService;
 import cz.muni.fi.eventsshop.model.User;
 
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ public class EventDTO {
 
     private String name;
 
-    private List<EventService> eventServices = new ArrayList<>();
+    private List<EventServiceDTO> eventServices = new ArrayList<>();
 
 //	@DecimalMin("0.00")
 //    @Column(nullable = false)
@@ -28,7 +27,7 @@ public class EventDTO {
 
     private Date date;
 
-    private User client;
+    private Long client;
 
     private Event.EventState state;
 
@@ -48,11 +47,11 @@ public class EventDTO {
         this.name = name;
     }
 
-    public List<EventService> getEventServices() {
+    public List<EventServiceDTO> getEventServiceDTOs() {
         return eventServices;
     }
 
-    public void setEventServices(List<EventService> eventServices) {
+    public void setEventServiceDTOs(List<EventServiceDTO> eventServices) {
         this.eventServices = eventServices;
     }
 
@@ -80,11 +79,11 @@ public class EventDTO {
         this.date = date;
     }
 
-    public User getClient() {
+    public Long getClient() {
         return client;
     }
 
-    public void setClient(User client) {
+    public void setClient(Long client) {
         this.client = client;
     }
 

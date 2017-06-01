@@ -16,6 +16,8 @@ export const FETCH_CATEGORY_START = 'FETCH_CATEGORY_START';
 export const FETCH_CATEGORY_ERROR = 'FETCH_CATEGORY_ERROR';
 export const FETCH_CATEGORY_SUCCESS = 'FETCH_CATEGORY_SUCCESS';
 
+export const DELETE_CATEGORY = 'DELETE_CATEGORY';
+
 export const RESET_CATEGORY_FORM = 'RESET_CATEGORY_FORM';
 
 
@@ -54,6 +56,14 @@ function fetchCategorySuccess(category) {
 		category
 	};
 }
+export function deleteCategory(id) {
+    return (dispatch, getState, { api }) => {
+        api.categoriesApi.deleteCategory(id);
+            // .then(categories => dispatch(fetchCategoriesSuccess(categories)))
+            // .catch(e => dispatch(fetchCategoriesError(e)));
+    };
+}
+
 export function fetchCategories() {
 	return (dispatch, getState, { api }) => {
 		dispatch(fetchCategoriesStart());

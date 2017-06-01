@@ -1,4 +1,4 @@
-package cz.muni.fi.eventsshop.facade.DTO;
+package cz.muni.fi.eventsshop.service.DTO;
 
 import cz.muni.fi.eventsshop.model.User;
 
@@ -7,7 +7,7 @@ import java.util.Set;
 /**
  * Created by pato on 1.6.2017.
  */
-public class UseDTO {
+public class UserDTO {
 
     private long id;
     private String name;
@@ -57,7 +57,7 @@ public class UseDTO {
 
     @Override
     public String toString() {
-        return "UseDTO{" +
+        return "UserDTO{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", oAuthId='" + oAuthId + '\'' +

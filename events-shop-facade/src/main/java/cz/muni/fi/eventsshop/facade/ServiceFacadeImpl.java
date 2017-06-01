@@ -2,7 +2,7 @@ package cz.muni.fi.eventsshop.facade;
 
 import cz.muni.fi.eventsshop.exceptions.BeanNotExistsException;
 import cz.muni.fi.eventsshop.exceptions.InternalException;
-import cz.muni.fi.eventsshop.facade.DTO.ServiceDTO;
+import cz.muni.fi.eventsshop.service.DTO.ServiceDTO;
 import cz.muni.fi.eventsshop.model.Service;
 import cz.muni.fi.eventsshop.service.BeanMappingService;
 import cz.muni.fi.eventsshop.service.ServiceService;
@@ -11,6 +11,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by patrik.cyprian on 14.5.2017.
@@ -27,19 +28,22 @@ public class ServiceFacadeImpl implements ServiceFacade {
 
     @Override
     public ServiceDTO createService(ServiceDTO data) throws InternalException {
-        Service serv = beanMappingService.mapTo(data, Service.class);
+        Service serv = beanMappingService.toService(data);
         service.createService(serv);
-        return  beanMappingService.mapTo(serv, ServiceDTO.class);
+        return  beanMappingService.fromService(serv);
     }
 
     @Override
     public List<ServiceDTO> getAllServices() throws InternalException {
-        return beanMappingService.mapTo(service.getAllServices(), ServiceDTO.class);
+        return service.getAllServices()
+                .stream()
+                .map(s -> beanMappingService.fromService(s))
+                .collect(Collectors.toList());
     }
 
     @Override
     public ServiceDTO getServiceById(long id) throws InternalException {
-        return beanMappingService.mapTo(service.getServiceById(id), ServiceDTO.class);
+        return beanMappingService.fromService(service.getServiceById(id));
     }
 
     @Override
@@ -47,7 +51,7 @@ public class ServiceFacadeImpl implements ServiceFacade {
         if (service.getServiceById(id) == null){
             throw new BeanNotExistsException("Service with id "+ id + " does not exist.");
         }
-        Service serv = beanMappingService.mapTo(data, Service.class);
+        Service serv = beanMappingService.toService(data);
         service.updateService(serv);
 
     }

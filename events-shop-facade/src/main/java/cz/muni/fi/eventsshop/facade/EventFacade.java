@@ -1,7 +1,7 @@
 package cz.muni.fi.eventsshop.facade;
 
 import cz.muni.fi.eventsshop.exceptions.InternalException;
-import cz.muni.fi.eventsshop.facade.DTO.EventDTO;
+import cz.muni.fi.eventsshop.service.DTO.EventDTO;
 import cz.muni.fi.eventsshop.model.Event;
 
 import java.util.List;

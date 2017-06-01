@@ -16,6 +16,7 @@ import Categories from './components/Categories';
 import Category from './components/Category';
 import CategoryEdit from './components/CategoryEdit';
 import CategoryNew from './components/CategoryNew';
+import ServiceNew from './components/ServiceNew';
 import categoriesReducer from './reducers/categories';
 import servicesReducer from './reducers/services';
 import eventsReducer from './reducers/events';
@@ -83,8 +84,8 @@ ReactDOM.render(
 						<Route path=":id" component={Category}/>
 						<Route path=":id/edit" component={CategoryEdit}/>
 					</Route>
+					<Route path="services/new" component={ServiceNew}/>
 					<Route path="services/:id" component={Service}/>
-					<Route path="services/new" component={CategoryEdit}/>
 					<Route path="services/:id/edit" component={Service}/>
 					<Route path="categories/new" component={CategoryEdit}/>
 					<Route path="categories/:id/edit" component={Categories}/>
