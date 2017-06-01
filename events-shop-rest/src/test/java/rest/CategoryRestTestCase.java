@@ -57,6 +57,7 @@ import java.net.URL;
 import java.util.List;
 import javax.inject.Inject;
 import javax.validation.ConstraintViolationException;
+import org.jboss.arquillian.junit.InSequence;
 import org.jboss.as.controller.access.constraint.Constraint;
 
 import static org.junit.Assert.assertEquals;
@@ -65,6 +66,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import org.junit.BeforeClass;
 
 @RunWith(Arquillian.class)
 public class CategoryRestTestCase {
@@ -74,9 +76,11 @@ public class CategoryRestTestCase {
 
     @ArquillianResource
     private URL deploymentURL;
-    
+
     private final String restResource = "api/v0.1";
-            
+    
+    private Category testCategory;
+
     @Deployment(testable = true)
     public static WebArchive create() {
         return ShrinkWrap.create(WebArchive.class)
@@ -85,28 +89,91 @@ public class CategoryRestTestCase {
                 .addPackages(true, "com.auth0.jwt")
                 .addAsResource("META-INF/persistence.xml");
     }
-
-    @Before
-    public void init(){
-        //System.out.println("***TEST DEPLOYMENT:"+deploymentURL);
+    
+    @BeforeClass
+    public static void staticInit(){
+//        testCategory = new Category();
+//        testCategory.setName("TestCategory");
+//        testCategory.setDescription("TestCategoryDescription");        
     }
     
+
+    @Before
+    public void init() {
+        //System.out.println("***TEST DEPLOYMENT:"+deploymentURL);
+        testCategory = new Category();
+        testCategory.setName("TestCategory");
+        testCategory.setDescription("TestCategoryDescription");
+        //testCategory.setId(100l);
+        
+    }
+    
+    public Category getCategoryByName(CategoryRest categoryRest, String name) throws InternalException{        
+        Object[] cat = categoryRest.getAllCategories().stream()
+                .filter(x -> x.getName().equals(name)).toArray();
+        Category foundCategory = cat.length > 0 ? (Category) cat[0] : new Category();
+        return foundCategory;
+    }
+    
+    
+
     @Test
     public void getAllCategories(
-        @ArquillianResteasyResource(restResource) CategoryRest categoryRest) throws InternalException {
-        
+            @ArquillianResteasyResource(restResource) CategoryRest categoryRest) throws InternalException {
+
         System.out.println("***FOUND CATEGORIES***");
         List<Category> categories = categoryRest.getAllCategories();
         assertNotNull(categories);
-        categories.forEach( x -> System.out.println(x.getName()));
+        categories.forEach(x -> System.out.println(x.getName()));
+    }
+
+    @Test
+    public void setNullCategory(
+            @ArquillianResteasyResource(restResource) CategoryRest categoryRest) throws InternalException {
+        expectedException.expect(ConstraintViolationException.class);
+        Category category = new Category();
+        categoryRest.createCategory(category);
+    }
+
+    @Test
+    @InSequence(1)
+    public void testCreateCategory(
+            @ArquillianResteasyResource(restResource) CategoryRest categoryRest) throws InternalException {
+        System.out.println("SEQUENCE 1");
+        categoryRest.createCategory(testCategory);
+        
+    }
+
+    @Test
+    @InSequence(2)
+    public void testReadCategory(
+            @ArquillianResteasyResource(restResource) CategoryRest categoryRest) throws InternalException {
+        System.out.println("SEQUENCE 2");        
+        assertEquals(testCategory, getCategoryByName(categoryRest, testCategory.getName()));
     }
     
     @Test
-    public void setCategory(
-        @ArquillianResteasyResource(restResource) CategoryRest categoryRest) throws InternalException {
-        expectedException.expect(ConstraintViolationException.class);
-        Category catt = new Category();
-        categoryRest.createCategory(catt);        
+    @InSequence(2)
+    public void testUpdateCategory(
+            @ArquillianResteasyResource(restResource) CategoryRest categoryRest) throws InternalException {
+        System.out.println("SEQUENCE 3");
+        Category foundCategory = getCategoryByName(categoryRest, testCategory.getName());
+        //testCategory.setDescription("OTHER_DESCRIPTION");
+        testCategory.setName("DummyName");
+        categoryRest.updateCategory(foundCategory.getId(), testCategory);
+        //assertEquals("OTHER_DESCRIPTION", getCategoryByName(categoryRest, testCategory.getName()).getDescription());
+        assertNotNull(getCategoryByName(categoryRest, "DummyName"));
+    }
+
+    @Test
+    @InSequence(3)
+    public void testDeleteCategory(
+            @ArquillianResteasyResource(restResource) CategoryRest categoryRest) throws InternalException {
+        System.out.println("SEQUENCE 4");                
+        Category foundCategory = getCategoryByName(categoryRest, testCategory.getName());
+        categoryRest.deleteCategory(foundCategory.getId());
+        assertEquals(null,categoryRest.getCategoryById(foundCategory.getId()));
+
     }
 
 }

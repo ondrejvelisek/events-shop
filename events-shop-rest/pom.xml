@@ -195,14 +195,14 @@
             </activation>
             <build>
                 <plugins>
-                    <plugin>
+<!--                    <plugin>
                         <artifactId>maven-surefire-plugin</artifactId>
                         <configuration>
                             <systemProperties>
                                 <jboss.version>${version.wildfly}</jboss.version>
                             </systemProperties>
                         </configuration>
-                    </plugin>
+                    </plugin>-->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-dependency-plugin</artifactId>
